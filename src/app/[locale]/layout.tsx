@@ -8,7 +8,7 @@ interface LocaleLayoutProps {
   params: Promise<{ locale: Locale }>;
 }
 
-export async function generateMetadata({ params }: LocaleLayoutProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   return {
     title:
