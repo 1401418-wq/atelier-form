@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
 }
 
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
-  const { locale } = await params;
+  const { locale } =  params;
 
   return (
     <>
