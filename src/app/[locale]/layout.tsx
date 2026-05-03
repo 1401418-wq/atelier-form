@@ -3,10 +3,7 @@ import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
 import type { Locale } from "@/lib/translations";
 
-interface LocaleLayoutProps {
-  children: React.ReactNode;
-  params: Promise<{ locale: Locale }>;
-}
+
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
@@ -22,9 +19,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
   };
 }
 
-export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
-  const { locale } = await params;
-
+export default async function LocaleLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: rawLocale } = await params;
+  const locale = rawLocale as Locale;
   return (
     <>
       <Navigation locale={locale} />
