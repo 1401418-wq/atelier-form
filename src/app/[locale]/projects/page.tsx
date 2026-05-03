@@ -2,11 +2,11 @@ import Link from "next/link";
 import type { Locale } from "@/lib/translations";
 
 interface ProjectsPageProps {
-  params: Promise<{ locale: Locale }>;
+  params: { locale: Locale };
 }
 
 export default async function ProjectsPage({ params }: ProjectsPageProps) {
-  const { locale } = await params;
+  const { locale } = params;
 
   const projects = [
     ["01", "Светлая квартира", "78 м² · тёплый минимализм", "2024"],
