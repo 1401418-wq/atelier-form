@@ -5,11 +5,11 @@ import type { Locale } from "@/lib/translations";
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
-  params: { locale: Locale };
+  params: Promise<{ locale: Locale }>;
 }
 
 export async function generateMetadata({ params }: LocaleLayoutProps): Promise<Metadata> {
-  const { locale } =  params;
+  const { locale } = await params;
   return {
     title:
       locale === "ru"
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
 }
 
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
-  const { locale } =  params;
+  const { locale } = await params;
 
   return (
     <>
