@@ -565,6 +565,7 @@ export default function HomePage() {
 /* ── Hero Section ────────────────────────────────────────────── */
 function HeroSection() {
   const ref = useRef<HTMLElement>(null);
+
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -573,50 +574,130 @@ function HeroSection() {
   }, []);
 
   return (
-    <section ref={ref} className="dp-section-wrap dp-hero-section max-w-[1320px] mx-auto px-8 md:px-16 pt-36 pb-24">
-      <div className="dp-hero-grid max-md:grid-cols-1 max-md:gap-10"
-        style={{ display: "grid", gridTemplateColumns: "1fr 0.85fr", gap: "44px", alignItems: "stretch" }}>
-
-        {/* LEFT */}
-        <div className="dp-hero-left" style={{ maxWidth: "520px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-          <p className="hero-label" style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.55em", color: "#9A9489", margin: 0 }}>
+    <section
+      ref={ref}
+      className="dp-section-wrap dp-hero-section max-w-[1320px] mx-auto px-5 md:px-16 pt-28 md:pt-36 pb-16 md:pb-24"
+    >
+      <div
+        className="dp-hero-grid"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 0.85fr",
+          gap: "44px",
+          alignItems: "stretch",
+        }}
+      >
+        <div
+          className="dp-hero-left"
+          style={{
+            maxWidth: "720px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <p
+            className="hero-label"
+            style={{
+              fontSize: "12px",
+              textTransform: "uppercase",
+              letterSpacing: "0.42em",
+              color: "#8A847B",
+              margin: 0,
+              marginBottom: "42px",
+            }}
+          >
             Functional planning &amp; interior design
           </p>
 
-          <h1 className="hero-title" style={{ fontSize: "clamp(82px, 11vw, 158px)", fontWeight: 200, lineHeight: 0.88, letterSpacing: "-0.035em", margin: 0 }}>
+          <h1
+            className="hero-title"
+            style={{
+              fontSize: "clamp(88px, 22vw, 158px)",
+              fontWeight: 200,
+              lineHeight: 0.86,
+              letterSpacing: "-0.055em",
+              margin: 0,
+              color: "#1C1C1A",
+            }}
+          >
             <span style={{ display: "block" }}>Design</span>
-            <span className="hero-planner" style={{ display: "block", marginLeft: "44px" }}>Planner</span>
+            <span style={{ display: "block", marginLeft: "42px" }}>Planner</span>
           </h1>
 
-          <div className="hero-buttons" style={{ display: "flex", alignItems: "center", gap: "32px" }}>
-            <a href="#contact" className="hero-cta"
-              style={{ fontSize: "11px", fontWeight: 300, textTransform: "uppercase", letterSpacing: "0.28em", color: "#1C1C1A", padding: "6px 0", transition: "color 0.25s ease" }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "#9A9489"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "#1C1C1A"; }}>
+          <div style={{ marginTop: "46px" }}>
+            <a
+              href="#contact"
+              className="hero-cta"
+              style={{
+                display: "inline-block",
+                fontSize: "13px",
+                fontWeight: 300,
+                textTransform: "uppercase",
+                letterSpacing: "0.3em",
+                color: "#1C1C1A",
+                textDecoration: "none",
+                paddingBottom: "6px",
+                borderBottom: "1px solid #8A847B",
+              }}
+            >
               Обсудить проект
             </a>
-            <span className="hero-sep" style={{ color: "#D0CBC3", fontSize: "12px" }}>—</span>
-            <a href="#projects" className="hero-link-projects"
-              style={{ fontSize: "11px", fontWeight: 300, textTransform: "uppercase", letterSpacing: "0.28em", color: "#9A9489", textDecoration: "none", padding: "6px 0", transition: "color 0.25s ease" }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "#1C1C1A"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "#9A9489"; }}>
-              Проекты
-            </a>
           </div>
-          {/* animated line — visible on mobile only via CSS */}
-          <span className="hero-line" style={{ display: "none" }} />
         </div>
 
-        {/* RIGHT */}
-        <div className="dp-hero-right hero-image" style={{ display: "flex", flexDirection: "column" }}>
-          <div className="hero-img-wrap" style={{ overflow: "hidden", flex: 1, position: "relative" }}>
-            <img src="/images/hero.jpg" alt="Design Planner interior" className="hero-img-el"
-              style={{ width: "100%", height: "100%", minHeight: "clamp(360px, 50vw, 620px)", objectFit: "cover", objectPosition: "center", display: "block" }} />
-            <div className="hero-img-overlay" style={{ position: "absolute", inset: 0, background: "rgba(30,28,26,0.10)", pointerEvents: "none" }} />
+        <div
+          className="dp-hero-right hero-image"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginTop: "28px",
+          }}
+        >
+          <div
+            className="hero-img-wrap"
+            style={{
+              overflow: "hidden",
+              position: "relative",
+            }}
+          >
+            <img
+              src="/images/hero.jpg"
+              alt="Design Planner interior"
+              className="hero-img-el"
+              style={{
+                width: "100%",
+                height: "clamp(320px, 50vw, 560px)",
+                objectFit: "cover",
+                objectPosition: "center",
+                display: "block",
+                transform: "scale(1.08)",
+                filter: "brightness(0.96)",
+                transition: "transform 1.4s ease, filter 1.4s ease",
+              }}
+            />
+            <div
+              className="hero-img-overlay"
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "rgba(30,28,26,0.06)",
+                pointerEvents: "none",
+              }}
+            />
           </div>
-          <p className="hero-caption" style={{ width: "100%", marginTop: "12px", fontSize: "12px", color: "#7A7570", lineHeight: 1.75 }}>
-            Проектируем пространства, в которых удобно жить.
-            От продуманной планировки до полной реализации интерьера.
+
+          <p
+            className="hero-caption"
+            style={{
+              width: "100%",
+              marginTop: "14px",
+              fontSize: "15px",
+              color: "#4D4944",
+              lineHeight: 1.55,
+              maxWidth: "680px",
+            }}
+          >
+            Проектируем пространства, в которых удобно жить. От продуманной планировки до полной реализации интерьера.
           </p>
         </div>
       </div>
