@@ -569,138 +569,112 @@ function HeroSection() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const t = setTimeout(() => el.classList.add("hero-ready"), 60);
+    const t = setTimeout(() => el.classList.add("hero-ready"), 80);
     return () => clearTimeout(t);
   }, []);
 
   return (
     <section
       ref={ref}
-      className="dp-section-wrap dp-hero-section max-w-[1320px] mx-auto px-5 md:px-16 pt-28 md:pt-36 pb-16 md:pb-24"
+      className="max-w-[1320px] mx-auto px-5 md:px-16 pt-32 md:pt-36 pb-20 md:pb-24"
     >
-      <div
-        className="dp-hero-grid"
+      <style>{`
+        .dp-hero-img {
+          transform: scale(1);
+          filter: brightness(0.94);
+          transition: transform 1600ms ease, filter 1600ms ease;
+        }
+
+        .hero-ready .dp-hero-img {
+          transform: scale(1.055);
+          filter: brightness(1.04);
+        }
+      `}</style>
+
+      <p
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 0.85fr",
-          gap: "44px",
-          alignItems: "stretch",
+          fontSize: "11px",
+          lineHeight: 1.7,
+          textTransform: "uppercase",
+          letterSpacing: "0.36em",
+          color: "#8F8981",
+          margin: "0 0 24px",
         }}
       >
-        <div
-          className="dp-hero-left"
+        Functional planning &amp; interior design
+      </p>
+
+      <h1
+        style={{
+          fontSize: "clamp(74px, 18vw, 96px)",
+          fontWeight: 200,
+          lineHeight: 0.86,
+          letterSpacing: "-0.065em",
+          color: "#1C1C1A",
+          margin: 0,
+          maxWidth: "620px",
+        }}
+      >
+        <span style={{ display: "block" }}>Design</span>
+        <span style={{ display: "block", marginLeft: "30px" }}>Planner</span>
+      </h1>
+
+      <div style={{ marginTop: "34px" }}>
+        <a
+          href="#contact"
           style={{
-            maxWidth: "720px",
-            display: "flex",
-            flexDirection: "column",
+            display: "inline-block",
+            fontSize: "14px",
+            fontWeight: 300,
+            textTransform: "uppercase",
+            letterSpacing: "0.3em",
+            color: "#1C1C1A",
+            textDecoration: "none",
+            paddingBottom: "3px",
+            borderBottom: "1px solid #6F6A63",
           }}
         >
-          <p
-            className="hero-label"
-            style={{
-              fontSize: "12px",
-              textTransform: "uppercase",
-              letterSpacing: "0.42em",
-              color: "#8A847B",
-              margin: 0,
-              marginBottom: "42px",
-            }}
-          >
-            Functional planning &amp; interior design
-          </p>
-
-          <h1
-            className="hero-title"
-            style={{
-              fontSize: "clamp(88px, 22vw, 158px)",
-              fontWeight: 200,
-              lineHeight: 0.86,
-              letterSpacing: "-0.055em",
-              margin: 0,
-              color: "#1C1C1A",
-            }}
-          >
-            <span style={{ display: "block" }}>Design</span>
-            <span style={{ display: "block", marginLeft: "42px" }}>Planner</span>
-          </h1>
-
-          <div style={{ marginTop: "46px" }}>
-            <a
-              href="#contact"
-              className="hero-cta"
-              style={{
-                display: "inline-block",
-                fontSize: "13px",
-                fontWeight: 300,
-                textTransform: "uppercase",
-                letterSpacing: "0.3em",
-                color: "#1C1C1A",
-                textDecoration: "none",
-                paddingBottom: "6px",
-                borderBottom: "1px solid #8A847B",
-              }}
-            >
-              Обсудить проект
-            </a>
-          </div>
-        </div>
-
-        <div
-          className="dp-hero-right hero-image"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            marginTop: "28px",
-          }}
-        >
-          <div
-            className="hero-img-wrap"
-            style={{
-              overflow: "hidden",
-              position: "relative",
-            }}
-          >
-            <img
-              src="/images/hero.jpg"
-              alt="Design Planner interior"
-              className="hero-img-el"
-              style={{
-                width: "100%",
-                height: "clamp(320px, 50vw, 560px)",
-                objectFit: "cover",
-                objectPosition: "center",
-                display: "block",
-                transform: "scale(1.08)",
-                filter: "brightness(0.96)",
-                transition: "transform 1.4s ease, filter 1.4s ease",
-              }}
-            />
-            <div
-              className="hero-img-overlay"
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: "rgba(30,28,26,0.06)",
-                pointerEvents: "none",
-              }}
-            />
-          </div>
-
-          <p
-            className="hero-caption"
-            style={{
-              width: "100%",
-              marginTop: "14px",
-              fontSize: "15px",
-              color: "#4D4944",
-              lineHeight: 1.55,
-              maxWidth: "680px",
-            }}
-          >
-            Проектируем пространства, в которых удобно жить. От продуманной планировки до полной реализации интерьера.
-          </p>
-        </div>
+          Обсудить проект
+        </a>
       </div>
+
+      <div
+  style={{
+    marginTop: "30px",
+    overflow: "hidden",
+    marginLeft: "-20px",
+    marginRight: "-20px",
+  }}
+
+      >
+        <img
+          src="/images/hero.jpg"
+          alt="Design Planner interior"
+          className="dp-hero-img"
+          style={{
+            width: "100%",
+            height: "300px",
+            objectFit: "cover",
+            objectPosition: "center",
+            display: "block",
+          }}
+        />
+      </div>
+
+      <p
+  style={{
+    marginTop: "16px",
+    fontSize: "15px",
+    lineHeight: 1.45,
+    color: "#4A4540",
+    paddingBottom: "36px",
+  }}
+
+
+
+      >
+        Проектируем пространства, в которых удобно жить. От продуманной планировки до полной реализации интерьера.
+      </p>
     </section>
   );
 }
