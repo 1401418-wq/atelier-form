@@ -8,7 +8,7 @@ export const translations = {
     nav: {
       projects: "Проекты",
       services: "Услуги",
-      approach: "Подход",
+      approach: "Процесс",
       about: "О студии",
       contact: "Контакты",
     },
@@ -122,7 +122,7 @@ export const translations = {
     nav: {
       projects: "Projects",
       services: "Services",
-      approach: "Approach",
+      approach: "Process",
       about: "About",
       contact: "Contact",
     },

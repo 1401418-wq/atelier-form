@@ -1,84 +1,112 @@
-"use client";
+import { FadeIn } from "@/components/ui/FadeIn";
+import type { Locale } from "@/lib/translations";
 
 type ApproachProps = {
-  locale: "ru" | "en";
+  locale: Locale;
+};
+
+const content = {
+  ru: {
+    label: "ПРОЦЕСС",
+    title: ["От первой встречи", "до реализации"],
+    steps: [
+      {
+        num: "01",
+        title: "Знакомство и замер",
+        text: "Обсуждаем задачу, фиксируем вводные, проводим замер и фотофиксацию пространства.",
+      },
+      {
+        num: "02",
+        title: "Планировочная логика",
+        text: "Выстраиваем сценарии жизни, эргономику и несколько вариантов планировочного решения.",
+      },
+      {
+        num: "03",
+        title: "Рабочая документация",
+        text: "Готовим чертежи, схемы, спецификации и решения, необходимые для реализации проекта.",
+      },
+      {
+        num: "04",
+        title: "Реализация и сопровождение",
+        text: "Помогаем пройти этап реализации спокойно: уточняем решения, контролируем детали и поддерживаем процесс.",
+      },
+    ],
+  },
+  en: {
+    label: "PROCESS",
+    title: ["From first meeting", "to completion"],
+    steps: [
+      {
+        num: "01",
+        title: "Briefing and measurements",
+        text: "Discussing the task, collecting inputs, measuring and documenting the space.",
+      },
+      {
+        num: "02",
+        title: "Planning logic",
+        text: "Building living scenarios, ergonomics and several layout options.",
+      },
+      {
+        num: "03",
+        title: "Working documentation",
+        text: "Preparing drawings, schemes, specifications and decisions needed for implementation.",
+      },
+      {
+        num: "04",
+        title: "Implementation support",
+        text: "Helping the project move calmly through execution, clarifying decisions and supporting the process.",
+      },
+    ],
+  },
 };
 
 export function Approach({ locale }: ApproachProps) {
-  const t =
-    locale === "ru"
-      ? {
-          label: "Подход",
-          title: "Сначала функция. Затем форма.",
-          items: [
-            {
-              title: "Логика пространства",
-              text: "Планировка строится вокруг реальных сценариев жизни.",
-            },
-            {
-              title: "Эргономика",
-              text: "Каждый метр должен работать удобно, спокойно и точно.",
-            },
-            {
-              title: "Визуальная чистота",
-              text: "Эстетика появляется там, где нет случайных решений.",
-            },
-          ],
-        }
-      : {
-          label: "Approach",
-          title: "Function first. Form follows.",
-          items: [
-            {
-              title: "Interior logic",
-              text: "Planning is built around real living scenarios.",
-            },
-            {
-              title: "Ergonomics",
-              text: "Every meter should work comfortably and precisely.",
-            },
-            {
-              title: "Visual clarity",
-              text: "Aesthetics appear when nothing is accidental.",
-            },
-          ],
-        };
+  const t = content[locale];
 
   return (
-    <section id="approach" className="px-6 md:px-12 py-[72px] md:py-32 border-t border-neutral-200">
-      <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16">
-          <div className="md:col-span-5">
-            <p className="text-xs uppercase tracking-[0.35em] text-neutral-400 mb-6 md:mb-8">
-              {t.label}
-            </p>
+    <section id="approach" className="py-20 md:py-36 border-t border-border">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
 
-            <h2 className="font-display text-[clamp(1.875rem,7vw,5rem)] font-light leading-[1.05] tracking-[-0.04em] max-w-xl">
-              {t.title}
+          {/* Left: label + title */}
+          <FadeIn className="md:col-span-4">
+            <p className="text-[10px] tracking-[0.28em] text-muted uppercase mb-5">{t.label}</p>
+            <h2 className="font-display text-[clamp(2rem,5vw,4rem)] font-light leading-[1.05] tracking-[-0.03em]">
+              {t.title[0]}
+              <br />
+              {t.title[1]}
             </h2>
-          </div>
+          </FadeIn>
 
-          <div className="md:col-span-7 md:pt-28">
-            <div className="divide-y divide-neutral-200 border-t border-neutral-200">
-              {t.items.map((item, index) => (
-                <div key={index} className="group grid grid-cols-12 gap-4 md:gap-6 py-7 md:py-10">
-                  <span className="col-span-2 text-xs text-neutral-500 pt-1 md:pt-2">
-                    {String(index + 1).padStart(2, "0")}
+          {/* Right: steps */}
+          <div className="md:col-span-8">
+            {t.steps.map((step, index) => (
+              <FadeIn key={step.num} delay={index * 100}>
+                <div className="group border-t border-border py-7 md:py-9 grid grid-cols-[3rem_1fr] md:grid-cols-[4rem_1fr] gap-x-4 md:gap-x-6 items-start cursor-default motion-safe:transition-colors duration-500 md:hover:border-foreground/25">
+
+                  {/* Number */}
+                  <span className="text-[10px] tracking-[0.28em] text-muted uppercase pt-[0.35rem] motion-safe:transition-colors duration-700 md:group-hover:text-foreground/60">
+                    {step.num}
                   </span>
 
-                  <div className="col-span-10 space-y-2 md:space-y-3">
-                    <h3 className="text-xl md:text-3xl font-light tracking-[-0.02em] text-neutral-800 transition duration-300 group-hover:translate-x-2">
-                      {item.title}
+                  <div className="space-y-2.5">
+                    {/* Title */}
+                    <h3 className="font-display text-[1.375rem] md:text-[1.75rem] font-light leading-[1.2] tracking-[-0.02em] motion-safe:transition-transform duration-700 md:group-hover:translate-x-1">
+                      {step.title}
                     </h3>
-
-                    <p className="text-neutral-400 leading-relaxed max-w-md text-sm md:text-base">
-                      {item.text}
+                    {/* Description */}
+                    <p className="text-[0.9375rem] leading-[1.75] text-[#4A4744]">
+                      {step.text}
                     </p>
                   </div>
+
                 </div>
-              ))}
-            </div>
+              </FadeIn>
+            ))}
+            {/* Closing border after last step */}
+            <div className="border-b border-border" />
           </div>
+
         </div>
       </div>
     </section>
