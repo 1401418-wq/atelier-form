@@ -1,0 +1,161 @@
+/* ── Section ────────────────────────────────────── */
+.hero {
+  padding-top: 144px;
+  padding-bottom: 96px;
+}
+
+/* ── Container ─────────────────────────────────── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Label ──────────────────────────────────────── */
+.label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+  color: #9A9489;
+  margin: 0 0 40px;
+}
+
+/* ── Grid ───────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 0.85fr;
+  gap: 48px;
+  align-items: stretch;
+}
+
+/* ── Left column ────────────────────────────────── */
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ── Title ──────────────────────────────────────── */
+.title {
+  font-size: clamp(72px, 10vw, 148px);
+  font-weight: 200;
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+  color: #1C1C1A;
+  margin: 0;
+}
+
+.titleLine {
+  display: block;
+}
+
+.titleLineIndent {
+  padding-left: 28px;
+}
+
+/* ── CTA ────────────────────────────────────────── */
+.cta {
+  display: inline-block;
+  width: fit-content;
+  font-size: 11px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: #1C1C1A;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(28, 28, 26, 0.45);
+  padding-bottom: 5px;
+  margin-top: 48px;
+  transition: opacity 0.3s ease, border-color 0.3s ease;
+}
+
+.cta:hover {
+  opacity: 0.6;
+  border-color: #9a9489;
+}
+
+/* ── Right column ───────────────────────────────── */
+.right {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ── Image wrapper ──────────────────────────────── */
+.imgWrap {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ── Image ──────────────────────────────────────── */
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+/* ── Caption — same width as image ─────────────── */
+.caption {
+  width: 100%;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #7A7570;
+  margin: 12px 0 0;
+}
+
+/* ── Mobile ─────────────────────────────────────── */
+@media (max-width: 767px) {
+  .hero {
+    padding-top: 96px;
+    padding-bottom: 48px;
+  }
+
+  .label {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: rgba(28, 28, 26, 0.55);
+    margin-bottom: 18px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .left {
+    justify-content: flex-start;
+  }
+
+  .title {
+    font-size: clamp(52px, 14vw, 68px);
+    line-height: 0.9;
+    margin-top: 12px;
+  }
+
+  .titleLineIndent {
+    padding-left: 14px;
+  }
+
+  .cta {
+    margin-top: 24px;
+    letter-spacing: 0.25em;
+    font-size: 11px;
+    color: rgba(28, 28, 26, 0.85);
+    border-bottom-color: rgba(28, 28, 26, 0.4);
+    padding-bottom: 6px;
+  }
+
+  .right {
+    margin-top: 32px;
+  }
+
+  .caption {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #5A5652;
+    margin-top: 14px;
+  }
+}
