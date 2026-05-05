@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useRef } from "react";
 import translations from "@/lib/translations";
 import type { Locale } from "@/lib/translations";
 import styles from "./Hero.module.css";
@@ -11,22 +8,6 @@ type Props = {
 
 export default function Hero({ locale }: Props) {
   const t = translations[locale].hero;
-  const imgRef = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    const el = imgRef.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      el.style.opacity = "1";
-      el.style.transform = "none";
-      return;
-    }
-    const timer = setTimeout(() => {
-      el.style.opacity = "1";
-      el.style.transform = "translateY(0) scale(1)";
-    }, 80);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <section className={styles.hero}>
@@ -53,13 +34,14 @@ export default function Hero({ locale }: Props) {
 
           {/* RIGHT: image + caption */}
           <div className={styles.right}>
-            <div className={styles.imgWrap}>
-              <img
-                ref={imgRef}
-                src="/images/hero.jpg"
-                alt="Design Planner interior"
-                className={styles.img}
-              />
+            <div className={styles.imageReveal}>
+              <div className={styles.imgWrap}>
+                <img
+                  src="/images/hero.jpg"
+                  alt="Design Planner interior"
+                  className={styles.img}
+                />
+              </div>
             </div>
             <p className={styles.caption}>
               {t.caption}

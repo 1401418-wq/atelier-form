@@ -113,6 +113,41 @@
   width: 100%;
 }
 
+/* ── Image reveal wrapper (animated) ───────────── */
+@keyframes heroImageIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.imageReveal {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .imageReveal {
+    will-change: opacity, transform, filter;
+    animation: heroImageIn 1400ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both;
+  }
+}
+
+/* На устройствах с reduce motion анимация отключается системно */
+@media (prefers-reduced-motion: reduce) {
+  .imageReveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    animation: none;
+  }
+}
+
 /* ── Image wrapper ──────────────────────────────── */
 .imgWrap {
   width: 100%;
@@ -124,19 +159,6 @@
   display: block;
   width: 100%;
   height: auto;
-  opacity: 0;
-  transform: translateY(20px) scale(1.02);
-  transition:
-    opacity 1100ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    transform 1100ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .img {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
 }
 
 /* ── Caption — same width as image ─────────────── */
