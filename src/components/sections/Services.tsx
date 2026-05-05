@@ -25,23 +25,29 @@ export function Services({ locale }: ServicesProps) {
         <div className="divide-y divide-border">
           {t.services.items.map((service, index) => (
             <FadeIn key={service.id} delay={index * 80}>
-              <div className="py-5 md:py-10 grid grid-cols-1 md:grid-cols-[1fr_auto_2fr] gap-y-3 md:gap-16 items-start group cursor-default">
+              {/*
+                Mobile (grid-cols-1): outer div is a normal block → number+title
+                stay inside their wrapper div, description follows below.
+                Desktop (3-col grid): md:contents on the wrapper div makes
+                number and title participate directly in the parent grid as
+                separate columns, giving: [3.5rem number] [1fr title] [1.6fr desc].
+              */}
+              <div className="py-5 md:py-9 grid grid-cols-1 md:grid-cols-[3.5rem_1fr_1.6fr] gap-y-3 md:gap-y-0 md:gap-x-5 items-start group cursor-default">
 
-                {/* Number + Title */}
-                <div>
-                  <p className="text-[10px] tracking-[0.28em] text-muted uppercase mb-3 md:mb-4 motion-safe:transition-colors duration-700 group-hover:text-foreground/70">
+                <div className="md:contents">
+                  {/* Number */}
+                  <p className="text-[10px] tracking-[0.28em] text-muted uppercase mb-3 md:mb-0 md:pt-[0.4rem] motion-safe:transition-colors duration-700 md:group-hover:text-foreground/70">
                     0{index + 1}
                   </p>
-                  <h3 className="font-display text-[1.375rem] md:text-[1.75rem] font-light leading-[1.2] tracking-[-0.02em] motion-safe:transition-transform duration-700 group-hover:translate-x-1">
+
+                  {/* Title */}
+                  <h3 className="font-display text-[1.375rem] md:text-[1.75rem] font-light leading-[1.2] tracking-[-0.02em] motion-safe:transition-transform duration-700 md:group-hover:translate-x-1">
                     {service.title}
                   </h3>
                 </div>
 
-                {/* Vertical divider (desktop only) */}
-                <div className="hidden md:block w-px bg-border self-stretch motion-safe:transition-colors duration-700 group-hover:bg-foreground/20" />
-
                 {/* Description */}
-                <p className="body-text max-w-lg motion-safe:transition-colors duration-700 group-hover:text-foreground">
+                <p className="text-[0.9375rem] leading-[1.75] text-[#4A4744] motion-safe:transition-colors duration-700 md:group-hover:text-foreground/85">
                   {service.description}
                 </p>
 
