@@ -82,12 +82,9 @@ export const translations = {
     },
 
     about: {
-      heading: "О студии",
-      subheading: "Design Planner — ателье функционального проектирования и дизайна жилых пространств.",
-      description: [
-        "Мы создаём интерьеры, где планировка, эстетика и реализация работают как единая система.",
-        "Каждое решение основано на логике пространства, сценариях жизни и точной работе с деталями.",
-      ],
+      eyebrow: "О СТУДИИ",
+      statement: "Ателье функционального проектирования и дизайна жилых пространств.",
+      description: "Мы создаём интерьеры, где планировка, эстетика и реализация работают как единая система.",
       values: [
         { label: "Логика", text: "Каждое решение имеет причину" },
         { label: "Эргономика", text: "Пространство работает для человека" },
@@ -120,20 +117,18 @@ export const translations = {
     },
 
     contact: {
-      heading: "Обсудить проект",
-      subheading: "Расскажите о вашем проекте. Мы ответим в течение одного рабочего дня.",
-      form: {
-        name: "Имя",
-        contact: "Телефон или email",
-        message: "О проекте",
-        submit: "Отправить",
-        success: "Сообщение отправлено. Мы свяжемся с вами.",
-      },
-      info: {
-        email: "hello@atelierform.ru",
-        phone: "+7 495 000 00 00",
-        address: "Москва, Россия",
-      },
+      eyebrow: "КОНТАКТЫ",
+      heading: "Обсудим ваш проект",
+      lead: "Расскажите о пространстве, задачах и желаемом формате работы. Мы предложим подходящий сценарий и следующий шаг.",
+      location: "Москва, Россия",
+      whatsappCta: "Написать в WhatsApp",
+      contacts: [
+        { label: "WhatsApp", value: "+7 966 044-43-33", href: "https://wa.me/79660444333" },
+        { label: "Telegram", value: "@KetDPln", href: "https://t.me/KetDPln" },
+        { label: "Instagram", value: "_designplanner_", href: "https://instagram.com/_designplanner_" },
+        { label: "Email", value: "designplannerstudio@gmail.com", href: "mailto:designplannerstudio@gmail.com" },
+        { label: "Телефон", value: "+7 966 044-43-33", href: "tel:+79660444333" },
+      ],
     },
 
     footer: {
@@ -220,12 +215,9 @@ export const translations = {
     },
 
     about: {
-      heading: "About",
-      subheading: "Design Planner is a studio for functional planning and residential interior design.",
-      description: [
-        "We create interiors where planning, aesthetics and implementation work as one system.",
-        "Every decision is based on spatial logic, real-life scenarios and precise attention to detail.",
-      ],
+      eyebrow: "ABOUT",
+      statement: "A studio for functional planning and residential interior design.",
+      description: "We create interiors where planning, aesthetics and implementation work as one system.",
       values: [
         { label: "Logic", text: "Every decision has a reason" },
         { label: "Ergonomics", text: "Space works for people" },
@@ -258,20 +250,18 @@ export const translations = {
     },
 
     contact: {
-      heading: "Discuss a project",
-      subheading: "Tell us about your project. We will reply within one business day.",
-      form: {
-        name: "Name",
-        contact: "Phone or email",
-        message: "About the project",
-        submit: "Send",
-        success: "Message sent. We will contact you.",
-      },
-      info: {
-        email: "hello@atelierform.ru",
-        phone: "+7 495 000 00 00",
-        address: "Moscow, Russia",
-      },
+      eyebrow: "CONTACTS",
+      heading: "Let's discuss your project",
+      lead: "Tell us about the space, your goals and the preferred format of work. We will suggest the right scenario and the next step.",
+      location: "Moscow, Russia",
+      whatsappCta: "Message on WhatsApp",
+      contacts: [
+        { label: "WhatsApp", value: "+7 966 044-43-33", href: "https://wa.me/79660444333" },
+        { label: "Telegram", value: "@KetDPln", href: "https://t.me/KetDPln" },
+        { label: "Instagram", value: "_designplanner_", href: "https://instagram.com/_designplanner_" },
+        { label: "Email", value: "designplannerstudio@gmail.com", href: "mailto:designplannerstudio@gmail.com" },
+        { label: "Phone", value: "+7 966 044-43-33", href: "tel:+79660444333" },
+      ],
     },
 
     footer: {
