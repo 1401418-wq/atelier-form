@@ -16,7 +16,7 @@ export default async function HomePage({
 
   return (
     <main>
-      <Hero />
+      <Hero locale={locale} />
       <ProjectsPreview locale={locale} />
       <Services locale={locale} />
       <Approach locale={locale} />

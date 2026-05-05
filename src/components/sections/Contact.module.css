@@ -73,6 +73,8 @@
   font-size: 0.875rem;
   font-weight: 300;
   color: #6B6560;
+  overflow-wrap: break-word;
+  word-break: break-all;
   transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -92,15 +94,61 @@
   }
 }
 
+/* Social button links */
+.socialLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #E2DED8;
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #6B6560;
+  text-decoration: none;
+  padding: 10px 18px;
+  border: 1px solid #D8D4CE;
+  min-height: 40px;
+  transition:
+    color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    border-color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@media (hover: hover) {
+  .socialLink:hover {
+    color: #1C1C1A;
+    border-color: #9A9489;
+  }
+}
+
 /* Mobile */
 @media (max-width: 767px) {
   .contactItem {
     padding: 0.875rem 0;
-    align-items: center;
+    align-items: flex-start;
     min-height: 48px;
   }
 
   .whatsappCta:hover {
     transform: none;
+  }
+
+  .socialLink {
+    min-height: 48px;
+    padding: 12px 20px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .socialLink {
+    transition: none;
   }
 }

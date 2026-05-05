@@ -16,6 +16,7 @@ export const translations = {
     hero: {
       title: "Design Planner",
       subtitle: "Продуманные пространства.\nГде форма работает на жизнь.",
+      caption: "Проектируем пространства, в которых удобно жить. От продуманной планировки до полной реализации интерьера.",
       cta_projects: "Смотреть проекты",
       cta_contact: "Обсудить проект",
       scroll: "Прокрутить",
@@ -123,11 +124,13 @@ export const translations = {
       location: "Москва, Россия",
       whatsappCta: "Написать в WhatsApp",
       contacts: [
-        { label: "WhatsApp", value: "+7 966 044-43-33", href: "https://wa.me/79660444333" },
-        { label: "Telegram", value: "@KetDPln", href: "https://t.me/KetDPln" },
-        { label: "Instagram", value: "_designplanner_", href: "https://instagram.com/_designplanner_" },
-        { label: "Email", value: "designplannerstudio@gmail.com", href: "mailto:designplannerstudio@gmail.com" },
         { label: "Телефон", value: "+7 966 044-43-33", href: "tel:+79660444333" },
+        { label: "Email", value: "designplannerstudio@gmail.com", href: "mailto:designplannerstudio@gmail.com" },
+      ],
+      socials: [
+        { label: "Telegram", href: "https://t.me/KetDPln" },
+        { label: "Instagram", href: "https://instagram.com/_designplanner_" },
+        { label: "WhatsApp", href: "https://wa.me/79660444333" },
       ],
     },
 
@@ -149,6 +152,7 @@ export const translations = {
     hero: {
       title: "Design Planner",
       subtitle: "Functional design and planning\nof living spaces.",
+      caption: "We design spaces that are comfortable to live in. From thoughtful planning to full interior realization.",
       cta_projects: "View projects",
       cta_contact: "Discuss a project",
       scroll: "Scroll",
@@ -256,11 +260,13 @@ export const translations = {
       location: "Moscow, Russia",
       whatsappCta: "Message on WhatsApp",
       contacts: [
-        { label: "WhatsApp", value: "+7 966 044-43-33", href: "https://wa.me/79660444333" },
-        { label: "Telegram", value: "@KetDPln", href: "https://t.me/KetDPln" },
-        { label: "Instagram", value: "_designplanner_", href: "https://instagram.com/_designplanner_" },
-        { label: "Email", value: "designplannerstudio@gmail.com", href: "mailto:designplannerstudio@gmail.com" },
         { label: "Phone", value: "+7 966 044-43-33", href: "tel:+79660444333" },
+        { label: "Email", value: "designplannerstudio@gmail.com", href: "mailto:designplannerstudio@gmail.com" },
+      ],
+      socials: [
+        { label: "Telegram", href: "https://t.me/KetDPln" },
+        { label: "Instagram", href: "https://instagram.com/_designplanner_" },
+        { label: "WhatsApp", href: "https://wa.me/79660444333" },
       ],
     },
 

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { projects } from "@/lib/projects";
-import type { Locale } from "@/lib/translations";
+import translations, { type Locale } from "@/lib/translations";
 import styles from "./ProjectsPreview.module.css";
 
 const projectImages: Record<string, string> = {
@@ -27,7 +27,7 @@ export function ProjectsPreview({ locale }: Props) {
       <div className="max-w-[1200px] mx-auto">
         <div className="mb-10 md:mb-16">
           <h2 className="font-display text-[clamp(2rem,8vw,4rem)] font-light tracking-[-0.04em]">
-            Проекты
+            {translations[locale].projects.heading}
           </h2>
         </div>
 

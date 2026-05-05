@@ -17,7 +17,7 @@ export default async function HomePage({
   const locale = rawLocale as Locale;
   return (
     <main>
-      <Hero />
+      <Hero locale={locale} />
       <ProjectsPreview locale={locale} />
       <Services locale={locale} />
       <Pricing locale={locale} />

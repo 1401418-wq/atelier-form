@@ -37,8 +37,8 @@ export function Footer({ locale }: FooterProps) {
           </div>
 
           <div className="space-y-2">
-            <p className="label">{t.contact.contacts[3].value}</p>
-            <p className="label">{t.contact.contacts[4].value}</p>
+            <p className="label">{t.contact.contacts[0].value}</p>
+            <p className="label">{t.contact.contacts[1].value}</p>
             <p className="label">{t.contact.location}</p>
           </div>
         </div>

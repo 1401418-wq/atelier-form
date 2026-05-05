@@ -1,19 +1,31 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import translations from "@/lib/translations";
+import type { Locale } from "@/lib/translations";
 import styles from "./Hero.module.css";
 
-export default function Hero() {
+type Props = {
+  locale: Locale;
+};
+
+export default function Hero({ locale }: Props) {
+  const t = translations[locale].hero;
   const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const el = imgRef.current;
     if (!el) return;
-    const t = setTimeout(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       el.style.opacity = "1";
-      el.style.transform = "translateY(0)";
+      el.style.transform = "none";
+      return;
+    }
+    const timer = setTimeout(() => {
+      el.style.opacity = "1";
+      el.style.transform = "translateY(0) scale(1)";
     }, 80);
-    return () => clearTimeout(t);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -26,7 +38,7 @@ export default function Hero() {
 
         <div className={styles.grid}>
 
-          {/* LEFT: label + title + cta */}
+          {/* LEFT: title + cta */}
           <div className={styles.left}>
             <h1 className={styles.title}>
               <span className={styles.titleLine}>Design</span>
@@ -35,23 +47,22 @@ export default function Hero() {
               </span>
             </h1>
             <a href="#contact" className={styles.cta}>
-              Обсудить проект
+              {t.cta_contact}
             </a>
           </div>
 
-          {/* RIGHT: image + caption — same width, same container */}
+          {/* RIGHT: image + caption */}
           <div className={styles.right}>
             <div className={styles.imgWrap}>
               <img
                 ref={imgRef}
                 src="/images/hero.jpg"
-                alt="Design Planner — интерьер"
+                alt="Design Planner interior"
                 className={styles.img}
               />
             </div>
             <p className={styles.caption}>
-              Проектируем пространства, в которых удобно жить.
-              От продуманной планировки до полной реализации интерьера.
+              {t.caption}
             </p>
           </div>
 

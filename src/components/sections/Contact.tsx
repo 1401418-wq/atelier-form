@@ -39,7 +39,7 @@ export function Contact({ locale }: ContactProps) {
             </a>
           </FadeIn>
 
-          {/* Right: contact info — restrained, informational */}
+          {/* Right: phone + email info rows, then social button links */}
           <FadeIn delay={150}>
             <div className={styles.contactList}>
               {t.contacts.map((item) => (
@@ -52,6 +52,19 @@ export function Contact({ locale }: ContactProps) {
                 >
                   <span className={styles.contactLabel}>{item.label}</span>
                   <span className={styles.contactValue}>{item.value}</span>
+                </a>
+              ))}
+            </div>
+            <div className={styles.socialLinks}>
+              {t.socials.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.socialLink}
+                >
+                  {item.label}
                 </a>
               ))}
             </div>
