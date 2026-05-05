@@ -95,6 +95,30 @@ export const translations = {
       ],
     },
 
+    additionalServices: {
+      eyebrow: "ДОПОЛНИТЕЛЬНО",
+      heading: "Дополнительные направления",
+      lead: "Помогаем не только разработать пространство, но и довести проект до практической реализации — от функционального проектирования до мебели и ремонта.",
+      items: [
+        {
+          num: "01",
+          title: "Функциональное проектирование",
+          text: "Различные решения перепланировок, практичная организация пространства и удобная логика повседневной жизни.",
+        },
+        {
+          num: "02",
+          title: "Встроенная и корпусная мебель",
+          text: "Гардеробные, шкафы-купе и мебель по индивидуальному эскизу, адаптированная под конкретное пространство.",
+        },
+        {
+          num: "03",
+          title: "Ремонт под ключ и детальное сопровождение",
+          text: "Черновой, косметический и капитальный ремонт с аккуратной координацией процесса и вниманием к деталям.",
+        },
+      ],
+      cta: "Обсудить проект",
+    },
+
     contact: {
       heading: "Обсудить проект",
       subheading: "Расскажите о вашем проекте. Мы ответим в течение одного рабочего дня.",
@@ -207,6 +231,30 @@ export const translations = {
         { label: "Ergonomics", text: "Space works for people" },
         { label: "Clarity", text: "Nothing extra, only essence" },
       ],
+    },
+
+    additionalServices: {
+      eyebrow: "ADDITIONAL",
+      heading: "Additional Services",
+      lead: "We help not only design the space, but also bring the project to practical realization — from functional planning to custom furniture and renovation support.",
+      items: [
+        {
+          num: "01",
+          title: "Functional Planning",
+          text: "Alternative layout solutions, practical space organization, and a comfortable logic for everyday living.",
+        },
+        {
+          num: "02",
+          title: "Built-in and Cabinet Furniture",
+          text: "Walk-in wardrobes, sliding wardrobes, and custom furniture designed specifically for the space.",
+        },
+        {
+          num: "03",
+          title: "Turnkey Renovation and Detailed Support",
+          text: "Rough, cosmetic, and full renovation with careful coordination and attention to detail.",
+        },
+      ],
+      cta: "Discuss a project",
     },
 
     contact: {
