@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Locale } from "@/lib/translations";
+import { type Locale, locales } from "@/lib/translations";
 import translations from "@/lib/translations";
 
 interface FooterProps {
@@ -7,49 +7,35 @@ interface FooterProps {
 }
 
 export function Footer({ locale }: FooterProps) {
-  const t = translations[locale];
+  const safeLocale: Locale = locales.includes(locale) ? locale : "ru";
+  const t = translations[safeLocale];
 
   return (
     <footer className="border-t border-border mt-32">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0">
-          {/* Brand */}
           <div>
             <p className="font-display text-xl font-light tracking-[0.08em] mb-2">
-              Atelier Form
+              Design Planner
             </p>
             <p className="label">{t.footer.tagline}</p>
           </div>
 
-          {/* Links */}
           <div className="space-y-3">
-            <Link
-              href={`/${locale}/projects`}
-              className="block label hover:text-foreground transition-colors"
-            >
+            <Link href={`/${safeLocale}/projects`} className="block label hover:text-foreground transition-colors">
               {t.nav.projects}
             </Link>
-            <Link
-              href={`/${locale}#services`}
-              className="block label hover:text-foreground transition-colors"
-            >
+            <Link href={`/${safeLocale}#services`} className="block label hover:text-foreground transition-colors">
               {t.nav.services}
             </Link>
-            <Link
-              href={`/${locale}#approach`}
-              className="block label hover:text-foreground transition-colors"
-            >
+            <Link href={`/${safeLocale}#approach`} className="block label hover:text-foreground transition-colors">
               {t.nav.approach}
             </Link>
-            <Link
-              href={`/${locale}#contact`}
-              className="block label hover:text-foreground transition-colors"
-            >
+            <Link href={`/${safeLocale}#contact`} className="block label hover:text-foreground transition-colors">
               {t.nav.contact}
             </Link>
           </div>
 
-          {/* Contact */}
           <div className="space-y-2">
             <p className="label">{t.contact.info.email}</p>
             <p className="label">{t.contact.info.phone}</p>
@@ -62,16 +48,10 @@ export function Footer({ locale }: FooterProps) {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <p className="label">{t.footer.copyright}</p>
           <div className="flex gap-6">
-            <Link
-              href="/ru"
-              className={`label transition-colors ${locale === "ru" ? "text-foreground" : "hover:text-foreground"}`}
-            >
+            <Link href="/ru" className={`label transition-colors ${safeLocale === "ru" ? "text-foreground" : "hover:text-foreground"}`}>
               RU
             </Link>
-            <Link
-              href="/en"
-              className={`label transition-colors ${locale === "en" ? "text-foreground" : "hover:text-foreground"}`}
-            >
+            <Link href="/en" className={`label transition-colors ${safeLocale === "en" ? "text-foreground" : "hover:text-foreground"}`}>
               EN
             </Link>
           </div>

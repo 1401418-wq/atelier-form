@@ -1,6 +1,7 @@
 import Hero from "@/components/sections/Hero";
 import { ProjectsPreview } from "@/components/sections/ProjectsPreview";
 import { Services } from "@/components/sections/Services";
+import { Pricing } from "@/components/sections/Pricing";
 import { Approach } from "@/components/sections/Approach";
 import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
@@ -18,6 +19,7 @@ export default async function HomePage({
       <Hero />
       <ProjectsPreview locale={locale} />
       <Services locale={locale} />
+      <Pricing locale={locale} />
       <Approach locale={locale} />
       <About locale={locale} />
       <Contact locale={locale} />

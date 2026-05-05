@@ -14,7 +14,7 @@ export const translations = {
     },
 
     hero: {
-      title: "Atelier Form",
+      title: "Design Planner",
       subtitle: "Продуманные пространства.\nГде форма работает на жизнь.",
       cta_projects: "Смотреть проекты",
       cta_contact: "Обсудить проект",
@@ -83,7 +83,7 @@ export const translations = {
 
     about: {
       heading: "О студии",
-      subheading: "Atelier Form — ателье функционального проектирования и дизайна жилых пространств.",
+      subheading: "Design Planner — ателье функционального проектирования и дизайна жилых пространств.",
       description: [
         "Мы создаём интерьеры, где планировка, эстетика и реализация работают как единая система.",
         "Каждое решение основано на логике пространства, сценариях жизни и точной работе с деталями.",
@@ -113,7 +113,7 @@ export const translations = {
     },
 
     footer: {
-      copyright: "© 2024 Atelier Form. Все права защищены.",
+      copyright: "© 2024 Design Planner. Все права защищены.",
       tagline: "Проектирование жилых пространств",
     },
   },
@@ -128,7 +128,7 @@ export const translations = {
     },
 
     hero: {
-      title: "Atelier Form",
+      title: "Design Planner",
       subtitle: "Functional design and planning\nof living spaces.",
       cta_projects: "View projects",
       cta_contact: "Discuss a project",
@@ -197,7 +197,7 @@ export const translations = {
 
     about: {
       heading: "About",
-      subheading: "Atelier Form is a studio for functional planning and residential interior design.",
+      subheading: "Design Planner is a studio for functional planning and residential interior design.",
       description: [
         "We create interiors where planning, aesthetics and implementation work as one system.",
         "Every decision is based on spatial logic, real-life scenarios and precise attention to detail.",
@@ -227,7 +227,7 @@ export const translations = {
     },
 
     footer: {
-      copyright: "© 2024 Atelier Form. All rights reserved.",
+      copyright: "© 2024 Design Planner. All rights reserved.",
       tagline: "Residential space design",
     },
   },
