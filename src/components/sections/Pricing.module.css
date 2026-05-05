@@ -1,0 +1,192 @@
+/* ── Card base ──────────────────────────────────── */
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid #E2DED8;
+  padding: 36px 32px 32px;
+  transition:
+    transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    border-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(28, 28, 26, 0.28);
+    background-color: #F0EDE8;
+  }
+
+  /* featured card gets a slightly deeper warm tone on hover */
+  .card.cardFeatured:hover {
+    background-color: #E5E0D8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+  .card:hover {
+    transform: none;
+  }
+}
+
+/* ── Featured card ──────────────────────────────── */
+.cardFeatured {
+  background-color: #ECEAE4;
+  border-color: rgba(28, 28, 26, 0.18);
+}
+
+/* ── Badge ──────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #6B6560;
+  border: 1px solid rgba(28, 28, 26, 0.18);
+  padding: 4px 10px;
+  margin-bottom: 20px;
+}
+
+/* ── Divider ────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background-color: #E2DED8;
+  margin: 22px 0;
+  flex-shrink: 0;
+}
+
+/* ── Items list ─────────────────────────────────── */
+.items {
+  flex-grow: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #7A7570;
+}
+
+.itemDash {
+  display: inline-block;
+  width: 10px;
+  height: 1px;
+  background-color: #C8C4BE;
+  flex-shrink: 0;
+  margin-top: 0.58em;
+}
+
+/* ── CTA ────────────────────────────────────────── */
+.cta {
+  display: inline-block;
+  position: relative;
+  align-self: flex-start;
+  margin-top: 28px;
+  padding-bottom: 5px;
+  font-size: 11px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: #1C1C1A;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition:
+    color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* static base line */
+.cta::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(28, 28, 26, 0.35);
+}
+
+/* animated overlay left → right */
+.cta::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #1C1C1A;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cta:hover {
+  color: #0A0A08;
+  transform: translateX(3px);
+}
+
+.cta:hover::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta,
+  .cta::after {
+    transition: none;
+  }
+}
+
+/* ── Mobile ─────────────────────────────────────── */
+@media (max-width: 767px) {
+  .card {
+    padding: 28px 24px;
+  }
+}
+
+/* ── Card reveal (custom, separate from global FadeIn) ── */
+.cardReveal {
+  opacity: 0;
+  /* mobile: stronger entry — 28px, 900ms */
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* desktop: keep consistent with site-wide FadeIn values */
+@media (min-width: 768px) {
+  .cardReveal {
+    transform: translateY(20px);
+    transition:
+      opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+.inView {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* no motion — cards immediately visible, no layout shift */
+@media (prefers-reduced-motion: reduce) {
+  .cardReveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
