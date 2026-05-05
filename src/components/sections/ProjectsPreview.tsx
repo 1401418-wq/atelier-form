@@ -23,7 +23,7 @@ export function ProjectsPreview({ locale }: Props) {
     .filter(Boolean) as typeof projects;
 
   return (
-    <section id="projects" className="px-6 md:px-12 py-[72px] md:py-24 border-t border-border">
+    <section id="projects" className="px-6 md:px-12 pt-[72px] pb-[72px] md:pt-[140px] md:pb-24 border-t border-border">
       <div className="max-w-[1200px] mx-auto">
         <div className="mb-10 md:mb-16">
           <h2 className="font-display text-[clamp(2rem,8vw,4rem)] font-light tracking-[-0.04em]">

@@ -31,13 +31,13 @@
     overflow-x: hidden;
   }
 
-  /* Offset anchor sections for the fixed header (64px mobile, 80px desktop) */
+  /* Offset anchor sections for the fixed header (64px mobile, 80px desktop) + 20px buffer */
   section[id] {
-    scroll-margin-top: 64px;
+    scroll-margin-top: 84px;
   }
   @media (min-width: 768px) {
     section[id] {
-      scroll-margin-top: 80px;
+      scroll-margin-top: 100px;
     }
   }
 
