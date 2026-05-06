@@ -97,7 +97,7 @@ export function Navigation({ locale }: NavProps) {
           ))}
         </div>
         <div className="absolute bottom-12 left-8 right-8 flex justify-between items-end">
-          <p className="label">hello@designplanner.ru</p>
+          <p className="label">designplannerstudio@gmail.com</p>
           <Link
             href={`/${otherLocale}`}
             onClick={() => setMenuOpen(false)}
