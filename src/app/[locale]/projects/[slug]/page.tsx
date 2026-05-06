@@ -1,59 +1,91 @@
+import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { projects } from "@/lib/projects";
-import type { Locale } from "@/lib/translations";
+import translations, { locales, type Locale } from "@/lib/translations";
 
-export default async function ProjectsPage({
+const localImages: Record<string, string> = {
+  "warm-apartment": "/projects/light-apartment.png",
+  "open-plan-house": "/projects/open-plan-house.png",
+  "soft-bedroom": "/projects/soft-bedroom.png",
+};
+
+export async function generateStaticParams() {
+  return locales.flatMap((locale) =>
+    projects.map((project) => ({ locale, slug: project.slug }))
+  );
+}
+
+export default async function ProjectPage({
   params,
 }: {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: Locale; slug: string }>;
 }) {
-  const { locale } = await params;
+  const { locale, slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
+
+  if (!project) notFound();
+
+  const t = translations[locale];
+  const imageSrc = localImages[slug] || project.heroImage;
 
   return (
-    <main className="pt-28">
-      <section className="px-6 md:px-12 py-24">
-        <div className="max-w-[1200px] mx-auto">
+    <main className="pt-24 pb-24">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12">
 
-          {/* Заголовок */}
-          <div className="mb-20">
-            <h1 className="text-5xl md:text-7xl font-light tracking-[-0.04em]">
-              Проекты
+        <Link
+          href={`/${locale}/projects`}
+          className="inline-block text-[11px] uppercase tracking-[0.28em] text-neutral-500 hover:text-neutral-900 transition mb-12"
+        >
+          {t.project.back}
+        </Link>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
+
+          <div>
+            <h1 className="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-light leading-[1.05] tracking-[-0.03em] mb-8">
+              {project.title[locale]}
             </h1>
+
+            <div className="flex gap-8 mb-8">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.28em] text-neutral-400 mb-1">
+                  {t.project.area}
+                </p>
+                <p className="text-sm text-neutral-800">{project.area}</p>
+              </div>
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.28em] text-neutral-400 mb-1">
+                  {t.project.year}
+                </p>
+                <p className="text-sm text-neutral-800">{project.year}</p>
+              </div>
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.28em] text-neutral-400 mb-1">
+                  {t.project.location}
+                </p>
+                <p className="text-sm text-neutral-800">{project.location[locale]}</p>
+              </div>
+            </div>
+
+            <p className="text-[0.9375rem] leading-[1.75] text-[#4A4744]">
+              {project.description[locale]}
+            </p>
           </div>
 
-          {/* Список */}
-          <div className="border-t border-neutral-200">
-            {projects.map((project, index) => (
-              <Link
-                key={project.id}
-                href={`/${locale}/projects/${project.slug}`}
-                className="group block border-b border-neutral-200 py-10"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-
-                  <div className="md:col-span-1 text-sm text-neutral-400">
-                    {String(index + 1).padStart(2, "0")}
-                  </div>
-
-                  <div className="md:col-span-5">
-                    <h2 className="text-2xl md:text-3xl font-light tracking-[-0.02em] group-hover:translate-x-2 transition">
-                      {project.title[locale]}
-                    </h2>
-                  </div>
-
-                  <div className="md:col-span-4 text-neutral-500">
-                    {project.shortDescription[locale]}
-                  </div>
-
-                  <div className="md:col-span-2 text-right text-sm text-neutral-400">
-                    {project.area} · {project.year}
-                  </div>
-                </div>
-              </Link>
-            ))}
+          <div className="relative aspect-[4/3] w-full overflow-hidden">
+            <Image
+              src={imageSrc}
+              alt={project.title[locale]}
+              fill
+              className="object-cover"
+              sizes="(max-width: 767px) 100vw, 50vw"
+              priority
+            />
           </div>
+
         </div>
-      </section>
+      </div>
     </main>
   );
 }

@@ -32,15 +32,4 @@ export const projects = [
     location: { ru: "Концепт", en: "Concept" },
     heroImage: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop",
   },
-  {
-    id: "4",
-    slug: "modern-house",
-    title: { ru: "Современный дом", en: "Modern House" },
-    shortDescription: { ru: "160 м² · Архитектура и природа", en: "160 m² · Architecture and nature" },
-    description: { ru: "Современный дом с акцентом на архитектуру, свет и связь с природой.", en: "A modern house focused on architecture, light and nature." },
-    area: "160 м²",
-    year: "2022",
-    location: { ru: "Концепт", en: "Concept" },
-    heroImage: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1600&auto=format&fit=crop",
-  },
 ];
