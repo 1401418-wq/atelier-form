@@ -11,14 +11,35 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Design Planner — Архитектурное проектирование и дизайн интерьеров",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://design-planner.com"
+  ),
+  title: "Design Planner — Interior Design & Functional Planning",
   description:
-    "Студия функционального проектирования и дизайна жилых пространств. Москва.",
-  keywords: ["дизайн интерьера", "архитектура", "планирование", "Москва"],
+    "We design residential spaces through thoughtful planning, interior design, technical documentation, and realization support.",
+  icons: {
+    icon: "/logo.png",
+  },
   openGraph: {
-    title: "Design Planner",
-    description: "Функциональное проектирование и дизайн жилых пространств",
+    title: "Design Planner — Interior Design & Functional Planning",
+    description:
+      "We design residential spaces through thoughtful planning, interior design, technical documentation, and realization support.",
     type: "website",
+    images: [
+      {
+        url: "/images/hero.jpg",
+        width: 1448,
+        height: 1086,
+        alt: "Design Planner — Interior Design",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Design Planner — Interior Design & Functional Planning",
+    description:
+      "We design residential spaces through thoughtful planning, interior design, technical documentation, and realization support.",
+    images: ["/images/hero.jpg"],
   },
 };
 
