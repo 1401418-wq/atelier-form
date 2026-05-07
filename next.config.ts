@@ -9,7 +9,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  allowedDevOrigins: ["192.168.31.151"],
   devIndicators: false,
 };
 
