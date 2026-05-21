@@ -36,7 +36,7 @@ export function Services({ locale }: ServicesProps) {
 
                 <div className="md:contents">
                   {/* Number */}
-                  <p className="text-[10px] tracking-[0.28em] text-muted uppercase mb-3 md:mb-0 md:pt-[0.4rem] motion-safe:transition-colors duration-700 md:group-hover:text-foreground/70">
+                  <p className="text-[11px] tracking-[0.28em] text-muted uppercase mb-3 md:mb-0 md:pt-[0.4rem] motion-safe:transition-colors duration-700 md:group-hover:text-foreground/70">
                     0{index + 1}
                   </p>
 
@@ -47,7 +47,7 @@ export function Services({ locale }: ServicesProps) {
                 </div>
 
                 {/* Description */}
-                <p className="text-[0.9375rem] leading-[1.75] text-[#4A4744] motion-safe:transition-colors duration-700 md:group-hover:text-foreground/85">
+                <p className="text-base leading-[1.75] text-[#4A4744] motion-safe:transition-colors duration-700 md:group-hover:text-foreground/85">
                   {service.description}
                 </p>
 

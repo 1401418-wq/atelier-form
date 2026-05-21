@@ -13,11 +13,11 @@
 
 /* ── Label ──────────────────────────────────────── */
 .label {
-  font-size: 11px;
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.5em;
-  color: #9A9489;
-  margin: 0 0 40px;
+  letter-spacing: 0.4em;
+  color: #4A4744;
+  margin: 0 0 52px;
 }
 
 /* ── Grid ───────────────────────────────────────── */
@@ -40,7 +40,7 @@
   font-family: var(--font-cormorant), "Times New Roman", serif;
   font-size: clamp(72px, 10vw, 148px);
   font-weight: 300;
-  line-height: 0.88;
+  line-height: 0.92;
   letter-spacing: -0.035em;
   color: #1C1C1A;
   margin: 0;
@@ -57,53 +57,24 @@
 /* ── CTA ────────────────────────────────────────── */
 .cta {
   display: inline-block;
-  position: relative;
   width: fit-content;
-  font-size: 11px;
-  font-weight: 300;
+  font-size: 12px;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.28em;
   color: #1C1C1A;
   text-decoration: none;
-  padding-bottom: 5px;
-  margin-top: 48px;
+  padding: 14px 28px;
+  margin-top: 52px;
+  border: 1px solid rgba(28, 28, 26, 0.42);
   transition:
-    color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* static base line — always visible */
-.cta::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: rgba(28, 28, 26, 0.4);
-}
-
-/* dark overlay — draws left → right on hover */
-.cta::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: #1C1C1A;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background-color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    border-color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .cta:hover {
-  color: #0A0A08;
-  transform: translateX(3px);
-}
-
-.cta:hover::after {
-  transform: scaleX(1);
+  background-color: #EDE8E0;
+  border-color: rgba(28, 28, 26, 0.5);
 }
 
 /* ── Right column ───────────────────────────────── */
@@ -114,37 +85,31 @@
 }
 
 /* ── Image reveal wrapper (animated) ───────────── */
-@keyframes heroImageIn {
+.imageReveal {
+  width: 100%;
+  opacity: 0;
+  transform: translateY(16px) scale(0.985);
+  animation: heroImageReveal 1100ms cubic-bezier(0.22, 1, 0.36, 1) 180ms forwards;
+  will-change: opacity, transform;
+}
+
+@keyframes heroImageReveal {
   from {
     opacity: 0;
-    transform: translateY(28px) scale(0.98);
-    filter: blur(6px);
+    transform: translateY(16px) scale(0.985);
   }
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
-    filter: blur(0);
   }
 }
 
-.imageReveal {
-  width: 100%;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .imageReveal {
-    will-change: opacity, transform, filter;
-    animation: heroImageIn 1400ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both;
-  }
-}
-
-/* На устройствах с reduce motion анимация отключается системно */
 @media (prefers-reduced-motion: reduce) {
   .imageReveal {
     opacity: 1;
     transform: none;
-    filter: none;
     animation: none;
+    will-change: auto;
   }
 }
 
@@ -164,9 +129,9 @@
 /* ── Caption — same width as image ─────────────── */
 .caption {
   width: 100%;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.7;
-  color: #7A7570;
+  color: #4A4744;
   margin: 12px 0 0;
 }
 
@@ -178,10 +143,10 @@
   }
 
   .label {
-    font-size: 10px;
-    letter-spacing: 0.35em;
-    color: rgba(28, 28, 26, 0.55);
-    margin-bottom: 18px;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: rgba(28, 28, 26, 0.82);
+    margin-bottom: 24px;
   }
 
   .grid {
@@ -195,7 +160,7 @@
 
   .title {
     font-size: clamp(52px, 14vw, 68px);
-    line-height: 0.9;
+    line-height: 0.92;
     margin-top: 12px;
   }
 
@@ -204,30 +169,20 @@
   }
 
   .cta {
-    margin-top: 28px;
+    margin-top: 32px;
     letter-spacing: 0.25em;
     font-size: 11px;
-    color: rgba(28, 28, 26, 0.85);
-    padding-bottom: 6px;
-  }
-
-  .cta:hover {
-    color: rgba(28, 28, 26, 0.85);
-    transform: none;
-  }
-
-  .cta::before {
-    background: rgba(28, 28, 26, 0.35);
+    padding: 13px 24px;
   }
 
   .right {
-    margin-top: 44px;
+    margin-top: 48px;
   }
 
   .caption {
     font-size: 14px;
     line-height: 1.55;
-    color: #5A5652;
+    color: #4A4744;
     margin-top: 14px;
   }
 }

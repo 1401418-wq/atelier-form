@@ -2,8 +2,8 @@
 .whatsappCta {
   display: inline-block;
   position: relative;
-  font-size: 11px;
-  font-weight: 300;
+  font-size: 12px;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.28em;
   color: #1C1C1A;
@@ -48,7 +48,7 @@
 
 /* Contact list — informational, not CTA-like */
 .contactList {
-  border-top: 1px solid rgba(30, 30, 28, 0.14);
+  border-top: 1px solid rgba(30, 30, 28, 0.22);
 }
 
 .contactItem {
@@ -57,22 +57,22 @@
   gap: 1.5rem;
   padding: 0.875rem 0;
   text-decoration: none;
-  border-bottom: 1px solid rgba(30, 30, 28, 0.14);
+  border-bottom: 1px solid rgba(30, 30, 28, 0.22);
 }
 
 .contactLabel {
   font-size: 10px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(30, 30, 28, 0.48);
+  color: rgba(30, 30, 28, 0.72);
   width: 5.5rem;
   flex-shrink: 0;
 }
 
 .contactValue {
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 300;
-  color: rgba(30, 30, 28, 0.82);
+  color: rgba(30, 30, 28, 0.9);
   overflow-wrap: break-word;
   word-break: break-all;
   transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -101,7 +101,7 @@
   gap: 8px;
   margin-top: 20px;
   padding-top: 20px;
-  border-top: 1px solid rgba(30, 30, 28, 0.14);
+  border-top: 1px solid rgba(30, 30, 28, 0.22);
 }
 
 .socialLink {
@@ -109,14 +109,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
-  font-weight: 300;
+  font-size: 11px;
+  font-weight: 400;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(30, 30, 28, 0.66);
+  color: rgba(30, 30, 28, 0.80);
   text-decoration: none;
   padding: 10px 12px;
-  border: 1px solid rgba(30, 30, 28, 0.26);
+  border: 1px solid rgba(30, 30, 28, 0.38);
   min-height: 40px;
   transition:
     color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -148,7 +148,7 @@
     min-height: 44px;
     padding: 10px 6px;
     letter-spacing: 0.13em;
-    font-size: 9px;
+    font-size: 10px;
   }
 }
 

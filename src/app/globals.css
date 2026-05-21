@@ -6,9 +6,9 @@
   :root {
     --background: #F5F3EF;
     --foreground: #1A1A1A;
-    --muted: #8A8680;
+    --muted: #6A6663;
     --muted-light: #C8C4BE;
-    --border: #E2DED8;
+    --border: #CEC9C3;
   }
 
   * {
@@ -26,8 +26,8 @@
     background-color: var(--background);
     color: var(--foreground);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 16px;
+    line-height: 1.65;
     overflow-x: hidden;
   }
 
@@ -69,10 +69,10 @@
   }
 
   .label {
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: #4A4744;
   }
 
   .section-heading {
