@@ -1,0 +1,23 @@
+Options -Indexes
+DirectorySlash Off
+RewriteEngine On
+RewriteBase /
+
+# Correct MIME types for JS and CSS chunks
+AddType application/javascript .js
+AddType text/css .css
+
+# Static asset directories — pass through without processing
+RewriteRule ^_next/ - [L]
+RewriteRule ^images/ - [L]
+
+# Redirect root to Russian version
+RewriteRule ^$ /ru [R=302,L]
+
+# Redirect .html URLs to clean URLs so Next.js router gets correct pathname
+RewriteRule ^ru\.html$ /ru [R=301,L]
+RewriteRule ^en\.html$ /en [R=301,L]
+
+# Serve .html file for extensionless URLs (works even when same-name directory exists)
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^.]+)$ $1.html [L]

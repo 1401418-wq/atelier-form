@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Navigation } from "@/components/layout/Navigation";
 import type { Locale } from "@/lib/translations";
 
+export { generateStaticParams } from "./generate-params";
+
 export async function generateMetadata({
   params,
 }: {

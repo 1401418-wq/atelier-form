@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { projects } from "@/lib/projects";
-import translations, { type Locale } from "@/lib/translations";
+import translations, { type Locale, locales } from "@/lib/translations";
+
+export async function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
 export default async function ProjectsPage({
   params,

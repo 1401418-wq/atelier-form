@@ -100,12 +100,18 @@
     text-wrap: balance;
   }
 
-  /* Fade-up animation utility */
+  /* Fade-up animation utility.
+     Content is visible by default (no-JS fallback).
+     The inline script in layout.tsx adds 'js-anim' to <html> synchronously
+     before first paint, enabling animations only when JS is available. */
   .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(20px);
     transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  html.js-anim .animate-on-scroll:not(.in-view) {
+    opacity: 0;
+    transform: translateY(20px);
   }
 
   .animate-on-scroll.in-view {
@@ -114,7 +120,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .animate-on-scroll {
+    html.js-anim .animate-on-scroll:not(.in-view) {
       opacity: 1;
       transform: none;
       transition: none;

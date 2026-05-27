@@ -52,6 +52,8 @@ export default function RootLayout({
     <html lang="ru" className={cormorant.variable}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* Runs synchronously before first paint so animations only hide content when JS is available */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js-anim')" }} />
       </head>
       <body className="bg-background text-foreground antialiased">
         {children}
