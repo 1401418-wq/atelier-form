@@ -11,6 +11,7 @@ export const translations = {
       approach: "Процесс",
       about: "О студии",
       contact: "Контакты",
+      brief: "Концепция",
     },
 
     hero: {
@@ -19,6 +20,7 @@ export const translations = {
       caption: "Проектируем пространства, в которых удобно жить. От продуманной планировки до полной реализации интерьера.",
       cta_projects: "Смотреть проекты",
       cta_contact: "Обсудить проект",
+      cta_brief: "Собрать концепцию",
       scroll: "Прокрутить",
     },
 
@@ -147,6 +149,7 @@ export const translations = {
       approach: "Process",
       about: "About",
       contact: "Contact",
+      brief: "Concept",
     },
 
     hero: {
@@ -155,6 +158,7 @@ export const translations = {
       caption: "We design spaces that are comfortable to live in. From thoughtful planning to full interior realization.",
       cta_projects: "View projects",
       cta_contact: "Discuss a project",
+      cta_brief: "Build a concept",
       scroll: "Scroll",
     },
 

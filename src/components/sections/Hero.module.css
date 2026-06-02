@@ -77,6 +77,17 @@
   border-color: rgba(28, 28, 26, 0.5);
 }
 
+.ctaGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 52px;
+}
+
+.ctaGroup .cta {
+  margin-top: 0;
+}
+
 /* ── Right column ───────────────────────────────── */
 .right {
   display: flex;

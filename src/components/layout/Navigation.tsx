@@ -31,6 +31,7 @@ export function Navigation({ locale }: NavProps) {
     { href: `/${safeLocale}#services`, label: t.nav.services },
     { href: `/${safeLocale}#approach`, label: t.nav.approach },
     { href: `/${safeLocale}#contact`, label: t.nav.contact },
+    { href: `/brief`, label: t.nav.brief, accent: true },
   ];
 
   return (
@@ -56,7 +57,12 @@ export function Navigation({ locale }: NavProps) {
               <Link
                 key={link.href}
                 href={link.href}
-                className="label hover:text-foreground transition-colors duration-300"
+                className={clsx(
+                  "label transition-colors duration-300",
+                  link.accent
+                    ? "text-[#8a7a66] hover:text-[#4A4744]"
+                    : "hover:text-foreground"
+                )}
               >
                 {link.label}
               </Link>
@@ -89,7 +95,10 @@ export function Navigation({ locale }: NavProps) {
               <Link
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="font-display text-4xl font-light text-foreground hover:text-muted transition-colors"
+                className={clsx(
+                  "font-display text-4xl font-light hover:text-muted transition-colors",
+                  link.accent ? "text-[#8a7a66]" : "text-foreground"
+                )}
               >
                 {link.label}
               </Link>

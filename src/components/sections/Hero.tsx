@@ -1,3 +1,4 @@
+import Link from "next/link";
 import translations from "@/lib/translations";
 import type { Locale } from "@/lib/translations";
 import styles from "./Hero.module.css";
@@ -27,9 +28,14 @@ export default function Hero({ locale }: Props) {
                 Planner
               </span>
             </h1>
-            <a href="#contact" className={styles.cta}>
-              {t.cta_contact}
-            </a>
+            <div className={styles.ctaGroup}>
+              <a href="#contact" className={styles.cta}>
+                {t.cta_contact}
+              </a>
+              <Link href="/brief" className={styles.cta}>
+                {t.cta_brief}
+              </Link>
+            </div>
           </div>
 
           {/* RIGHT: image + caption */}

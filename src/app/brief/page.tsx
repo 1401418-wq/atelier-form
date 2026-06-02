@@ -115,7 +115,7 @@ export default function BriefPage() {
             ← Design Planner
           </Link>
           <span className="text-[11px] tracking-[0.2em] uppercase text-[#6b635c]">
-            Бриф для AI-мудборда
+            Концепция интерьера
           </span>
         </div>
       </header>
@@ -123,11 +123,11 @@ export default function BriefPage() {
       <div className="max-w-[1180px] mx-auto px-6 md:px-8 py-12 md:py-16">
         <section className="mb-10">
           <h1 className="font-light text-[2rem] md:text-[2.5rem] tracking-tight leading-tight mb-3">
-            Расскажите о пространстве —<br />получите 3 концепт-направления
+            Расскажите о пространстве —<br />получите 3 концепции интерьера
           </h1>
           <p className="text-[15px] text-[#6b635c] max-w-[640px]">
-            Заполните бриф, и в течение минуты Claude соберёт три заметно разных направления
-            с палитрой, материалами и мебелью. Используем как стартовую точку для разговора.
+            Заполните короткий бриф, и за минуту мы соберём три заметно разных направления:
+            палитра, материалы, мебель, настроение. Стартовая точка для разговора с Екатериной.
           </p>
         </section>
 
