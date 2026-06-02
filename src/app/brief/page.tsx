@@ -6,6 +6,14 @@ import Link from "next/link";
 const BACKEND_URL = "https://web-production-336017.up.railway.app/brief";
 
 type Palette = { hex: string; name: string };
+type Image = {
+  prompt: string;
+  query: string | null;
+  url: string | null;
+  photographer: string | null;
+  page: string | null;
+};
+
 type Concept = {
   name: string;
   tagline: string;
@@ -15,6 +23,8 @@ type Concept = {
   lighting: string;
   mood: string;
   image_prompts: string[];
+  pexels_queries?: string[];
+  images?: Image[];
 };
 
 type FormState = {
@@ -346,21 +356,46 @@ function ConceptCard({ concept: c, idx }: { concept: Concept; idx: number }) {
         <div className="md:col-span-2">
           <BlockTitle>Визуальные референсы</BlockTitle>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {c.image_prompts.map((p, i) => (
+            {(c.images && c.images.length ? c.images : c.image_prompts.map((p) => ({ prompt: p, url: null, photographer: null, page: null, query: null }))).map((img, i) => (
               <figure key={i}>
-                <div
-                  className="aspect-square rounded"
-                  style={{ background: TILE_GRADIENTS[i % TILE_GRADIENTS.length] }}
-                />
+                {img.url ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={img.url}
+                    alt={img.prompt}
+                    className="aspect-square w-full object-cover rounded"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div
+                    className="aspect-square rounded"
+                    style={{ background: TILE_GRADIENTS[i % TILE_GRADIENTS.length] }}
+                  />
+                )}
                 <figcaption className="text-[11px] text-[#6b635c] mt-2 leading-snug">
-                  {p}
+                  {img.prompt}
+                  {img.photographer && img.page && (
+                    <>
+                      {" · "}
+                      <a
+                        href={img.page}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="underline hover:text-[#2b2724]"
+                      >
+                        фото {img.photographer} / Pexels
+                      </a>
+                    </>
+                  )}
                 </figcaption>
               </figure>
             ))}
           </div>
-          <p className="text-[11px] italic text-[#6b635c] mt-3">
-            Плейсхолдеры. Промпты готовы к копированию в Midjourney / DALL-E.
-          </p>
+          {!(c.images && c.images.some((i) => i.url)) && (
+            <p className="text-[11px] italic text-[#6b635c] mt-3">
+              Плейсхолдеры. Промпты готовы к копированию в Midjourney / DALL-E.
+            </p>
+          )}
         </div>
 
         <div className="md:col-span-2">
