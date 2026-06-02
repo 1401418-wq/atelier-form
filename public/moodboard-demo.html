@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Концепт-мудборд · Design Planner</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root {
+    --ink: #2b2724;
+    --ink-soft: #6b635c;
+    --bg: #f6f3ee;
+    --paper: #ffffff;
+    --line: #e6e0d6;
+    --accent: #8a7a66;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "SF Pro Text", "Inter", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 56px 32px; }
+  .top {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 28px;
+    margin-bottom: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .top h1 { margin: 0 0 6px; font-size: 30px; font-weight: 500; letter-spacing: -0.02em; }
+  .top .studio { color: var(--ink-soft); font-size: 13px; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 12px; }
+  .top .brief { max-width: 520px; color: var(--ink-soft); font-size: 14px; padding: 16px 20px; background: var(--paper); border: 1px solid var(--line); border-radius: 4px; }
+  .top .brief strong { color: var(--ink); display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+
+  .concept { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 40px; margin-bottom: 32px; }
+  .c-head { display: flex; gap: 24px; align-items: flex-start; margin-bottom: 36px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+  .c-num { font-size: 44px; font-weight: 300; color: var(--accent); line-height: 1; letter-spacing: -0.04em; }
+  .c-head h2 { margin: 0 0 4px; font-size: 26px; font-weight: 500; letter-spacing: -0.01em; }
+  .tagline { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .block h3 { margin: 0 0 14px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ink-soft); font-weight: 600; }
+  .block h4 { margin: 16px 0 6px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ink-soft); font-weight: 600; }
+  .block p { margin: 0; color: var(--ink); }
+  .block ul { margin: 0; padding: 0; list-style: none; }
+  .block ul li { padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 14px; }
+  .block ul li:last-child { border-bottom: none; }
+
+  .images { grid-column: 1 / -1; }
+  .image-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .tile { margin: 0; }
+  .tile .ph {
+    aspect-ratio: 1 / 1;
+    border-radius: 4px;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,.4), rgba(0,0,0,.05)),
+      var(--accent);
+    position: relative;
+  }
+  .tile-1 .ph { background: linear-gradient(135deg, #d8cbb8, #b4a48b); }
+  .tile-2 .ph { background: linear-gradient(135deg, #e5dccc, #8a7a66); }
+  .tile-3 .ph { background: linear-gradient(135deg, #c4b5a0, #6b5d4a); }
+  .tile-4 .ph { background: linear-gradient(135deg, #ede4d4, #a89578); }
+  .tile figcaption { margin-top: 8px; font-size: 11px; color: var(--ink-soft); line-height: 1.4; }
+  .hint { margin-top: 16px !important; font-size: 12px; color: var(--ink-soft); font-style: italic; }
+
+  .palette { grid-column: 1 / -1; }
+  .palette-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .swatch {
+    aspect-ratio: 1 / 1.1;
+    border-radius: 4px;
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px;
+    color: #fff;
+    font-size: 11px;
+    text-shadow: 0 1px 2px rgba(0,0,0,.25);
+    position: relative;
+  }
+  .swatch span { font-family: ui-monospace, "SF Mono", monospace; font-size: 10px; opacity: 0.85; }
+  .swatch em { font-style: normal; font-size: 12px; font-weight: 500; margin-top: 2px; }
+
+  footer { text-align: center; color: var(--ink-soft); font-size: 12px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); }
+
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .image-grid, .palette-row { grid-template-columns: repeat(2, 1fr); }
+    .wrap { padding: 32px 18px; }
+    .concept { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <div class="studio">Design Planner · концепт-мудборд</div>
+      <h1>3 направления для обсуждения</h1>
+    </div>
+    <div class="brief"><strong>Бриф</strong>Гостиная 25 м² в новостройке. Молодая пара, без детей. Окно на запад, потолок 2.8 м. Любят читать, принимают друзей. Хотят спокойно и не скучно. Бюджет средний.</div>
+  </div>
+  
+<section class="concept" id="c1">
+  <header class="c-head">
+    <span class="c-num">01</span>
+    <div>
+      <h2>Тёплая земля</h2>
+      <p class="tagline">Уют из природных текстур, где вечер начинается с первым светом заката</p>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="block images">
+      <h3>Визуальные референсы</h3>
+      <div class="image-grid"><figure class="tile tile-1"><div class="ph"></div><figcaption>warm minimalist living room, oak furniture, linen sofa, jute rug, golden hour sunset light through west window, cinematic 35mm</figcaption></figure><figure class="tile tile-2"><div class="ph"></div><figcaption>low oak sofa with sandy linen cushions, terracotta vase, warm evening light, shallow depth of field, film grain</figcaption></figure><figure class="tile tile-3"><div class="ph"></div><figcaption>close-up of jute rug texture and raw oak coffee table edge, warm side lighting, macro, muted earth tones</figcaption></figure><figure class="tile tile-4"><div class="ph"></div><figcaption>limewash plaster accent wall, asymmetric oak shelf with ceramics, soft warm spotlight, architectural photography</figcaption></figure></div>
+      <p class="hint">Плейсхолдеры под AI-генерацию или фото-референсы. Промпты готовы для DALL-E / Midjourney.</p>
+    </div>
+
+    <div class="block palette">
+      <h3>Палитра</h3>
+      <div class="palette-row"><div class="swatch" style="background:#F5EFE6"><span>#F5EFE6</span><em>Тёплый крем</em></div><div class="swatch" style="background:#E0D5C5"><span>#E0D5C5</span><em>Льняной песок</em></div><div class="swatch" style="background:#C4A882"><span>#C4A882</span><em>Топлёное масло</em></div><div class="swatch" style="background:#8B6F47"><span>#8B6F47</span><em>Обожжённая карамель</em></div><div class="swatch" style="background:#3D2B1F"><span>#3D2B1F</span><em>Горький шоколад</em></div></div>
+    </div>
+
+    <div class="block mood">
+      <h3>Настроение</h3>
+      <p>Ощущение, будто ты вернулся домой после долгой прогулки — снял обувь, накинул плед. Западное солнце в 17:00 заливает комнату янтарём, тени мягкие и длинные. Тихо, пахнет деревом и льном.</p>
+      <h4>Свет</h4>
+      <p>Тёплый свет 2700K, основной — встроенные споты с диммером направлены на стены. Вечером работают только торшер и свечи на журнальном столике.</p>
+    </div>
+
+    <div class="block materials">
+      <h3>Материалы и текстуры</h3>
+      <ul><li>Дуб натуральный, светлая морилка, матовый лак</li><li>Бельгийский лён, оттенок овса, плетение рогожка</li><li>Джутовый ковёр ручного плетения, плоский ворс</li><li>Терракотовая керамика, необожжённый финиш</li><li>Известковая штукатурка стен, фактура мастихина</li><li>Натуральная кожа, тонкий нубук, цвет миндаль</li></ul>
+    </div>
+
+    <div class="block furniture">
+      <h3>Мебель и предметы</h3>
+      <ul><li>Низкий диван на деревянных ножках, обивка лён песочный, глубокие подушки</li><li>Кофейный столик — массив дуба, неровный живой край, без ножек</li><li>Полка-лестница из дуба, асимметричная, 5 полок разной глубины</li><li>Кресло-ракушка, каркас орех, обивка нубук миндальный</li><li>Напольный светильник — матовая латунь, абажур из рисовой бумаги</li><li>Оттоманка квадратная, джут ручного плетения, двойная функция — пуф и столик</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="concept" id="c2">
+  <header class="c-head">
+    <span class="c-num">02</span>
+    <div>
+      <h2>Северный туман</h2>
+      <p class="tagline">Прохладная элегантность скандинавского утра — чистота без холодности</p>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="block images">
+      <h3>Визуальные референсы</h3>
+      <div class="image-grid"><figure class="tile tile-1"><div class="ph"></div><figcaption>scandinavian living room, birch furniture, grey-green palette, diffused daylight, clean lines, architectural digest style</figcaption></figure><figure class="tile tile-2"><div class="ph"></div><figcaption>compact corner sofa in grey tweed, wishbone chair, rattan, nordic interior, cool morning light, wide angle</figcaption></figure><figure class="tile tile-3"><div class="ph"></div><figcaption>close-up of ribbed glass shelf detail with ceramic vase, muted green tones, soft focus, product photography</figcaption></figure><figure class="tile tile-4"><div class="ph"></div><figcaption>micro-cement accent wall with floating TV console, linear ceiling light, minimalist nordic interior, dusk lighting</figcaption></figure></div>
+      <p class="hint">Плейсхолдеры под AI-генерацию или фото-референсы. Промпты готовы для DALL-E / Midjourney.</p>
+    </div>
+
+    <div class="block palette">
+      <h3>Палитра</h3>
+      <div class="palette-row"><div class="swatch" style="background:#F2F4F3"><span>#F2F4F3</span><em>Арктический белый</em></div><div class="swatch" style="background:#DDE4E1"><span>#DDE4E1</span><em>Туманная мята</em></div><div class="swatch" style="background:#A8BDB8"><span>#A8BDB8</span><em>Серо-зелёная сосна</em></div><div class="swatch" style="background:#5C7A74"><span>#5C7A74</span><em>Мох после дождя</em></div><div class="swatch" style="background:#2A3D3A"><span>#2A3D3A</span><em>Тёмный кедр</em></div></div>
+    </div>
+
+    <div class="block mood">
+      <h3>Настроение</h3>
+      <p>Воздух лёгкий, как в скандинавском доме у моря — много пространства, хочется дышать глубоко. Утро с кофе на подоконнике или вечер с книгой в кресле — ритм спокойный, без суеты. Звуки приглушены мягкими текстилями.</p>
+      <h4>Свет</h4>
+      <p>Нейтральный свет 3000K, линейные встроенные светильники вдоль потолочного периметра. Акцент — подвесная люстра из матового стекла над диваном, имитирует рассеянный дневной свет.</p>
+    </div>
+
+    <div class="block materials">
+      <h3>Материалы и текстуры</h3>
+      <ul><li>Берёза беленая, масло белое, матовая поверхность</li><li>Шерстяной твид, цвет туман, диагональное плетение</li><li>Шерстяной ковёр тафтинг, серо-зелёный, короткий ворс</li><li>Глазурованная керамика, глянцевый финиш, оттенки тумана</li><li>Бетон микро-цемент, полированный, стены и подоконник</li><li>Стекло матовое, рифлёное, вставки в мебели и перегородках</li></ul>
+    </div>
+
+    <div class="block furniture">
+      <h3>Мебель и предметы</h3>
+      <ul><li>Диван угловой компактный, каркас берёза, обивка твид серый, тонкие ножки</li><li>Журнальный столик — белый лак, геометрическая форма, съёмный поднос</li><li>Стеллаж открытый, берёза беленая, сетка-модуль 3×2, акцент зелёным</li><li>Кресло Wishbone-форма, дуб натуральный, сиденье из ротанга</li><li>Консоль под телевизор, навесная, бетон-эффект, без ручек</li><li>Пуф цилиндрический, шерсть букле белая, низкий, без ножек</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="concept" id="c3">
+  <header class="c-head">
+    <span class="c-num">03</span>
+    <div>
+      <h2>Полночный сад</h2>
+      <p class="tagline">Тёмный, зелёный и живой — интерьер, который не боится характера</p>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="block images">
+      <h3>Визуальные референсы</h3>
+      <div class="image-grid"><figure class="tile tile-1"><div class="ph"></div><figcaption>dark moody living room, bottle green velvet sofa, aged copper accents, tropical plants, warm candlelight, cinematic low key</figcaption></figure><figure class="tile tile-2"><div class="ph"></div><figcaption>low velvet sectional sofa with marble coffee table, dark oak shelving with interior lighting, evening atmosphere, editorial</figcaption></figure><figure class="tile tile-3"><div class="ph"></div><figcaption>close-up of aged copper lamp base and dark marble tabletop, warm bokeh, product still life, dramatic side light</figcaption></figure><figure class="tile tile-4"><div class="ph"></div><figcaption>slatted dark green wood accent wall with hidden LED backlight, large monstera plant, moody interior photography</figcaption></figure></div>
+      <p class="hint">Плейсхолдеры под AI-генерацию или фото-референсы. Промпты готовы для DALL-E / Midjourney.</p>
+    </div>
+
+    <div class="block palette">
+      <h3>Палитра</h3>
+      <div class="palette-row"><div class="swatch" style="background:#EEEAE3"><span>#EEEAE3</span><em>Рисовая бумага</em></div><div class="swatch" style="background:#C8CFC4"><span>#C8CFC4</span><em>Шалфей бледный</em></div><div class="swatch" style="background:#6B7F6A"><span>#6B7F6A</span><em>Свежий базилик</em></div><div class="swatch" style="background:#2E4A3E"><span>#2E4A3E</span><em>Полночный лес</em></div><div class="swatch" style="background:#1A2A24"><span>#1A2A24</span><em>Чёрный малахит</em></div></div>
+    </div>
+
+    <div class="block mood">
+      <h3>Настроение</h3>
+      <p>Гостиная, которую хочется показать — тёмная, сочная, чуть таинственная, но не мрачная. Живые растения в керамических горшках, запах дерева и воска. Вечером компания садится и не спешит расходиться — здесь хорошо.</p>
+      <h4>Свет</h4>
+      <p>Тёплый интимный свет 2200–2700K, точечные споты только на детали и растения. Основа вечернего сценария — три торшера разной высоты и скрытая LED-подсветка за рейками акцентной стены.</p>
+    </div>
+
+    <div class="block materials">
+      <h3>Материалы и текстуры</h3>
+      <ul><li>Дуб тёмный, морилка венге-лайт, масляный финиш</li><li>Бархат, цвет бутылочное стекло, рубчик средний</li><li>Натуральный ротанг, тёмная пропитка, плетение мелкое</li><li>Чёрный мрамор, матовый полиш, вставки на столешницах</li><li>Рейки дерево окрашенные, тёмно-зелёный, акцентная стена</li><li>Медь состаренная, матовый финиш, фурнитура и светильники</li></ul>
+    </div>
+
+    <div class="block furniture">
+      <h3>Мебель и предметы</h3>
+      <ul><li>Диван секционный, низкий, обивка бархат бутылочный, медные ножки</li><li>Журнальный столик — чёрный мрамор, каркас состаренная медь, форма капля</li><li>Шкаф-витрина открытый, тёмный дуб, подсветка внутри золотая лента</li><li>Кресло плетёное, ротанг тёмный, подушка бархат оливковый, форма яйцо</li><li>Напольный светильник — состаренная медь, абажур конус из кожи охра</li><li>Боковой столик — нефритовый мрамор круглый, медная ножка-конус</li></ul>
+    </div>
+  </div>
+</section>
+
+  <footer>Сгенерировано Claude · палитра, материалы и промпты под фото готовы к работе</footer>
+</div>
+</body>
+</html>
