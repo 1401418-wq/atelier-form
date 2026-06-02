@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 
 const BACKEND_URL = "https://web-production-336017.up.railway.app/brief";
+const REGEN_URL = "https://web-production-336017.up.railway.app/regenerate-images";
 
 type Palette = { hex: string; name: string };
 type Image = {
@@ -288,7 +289,16 @@ export default function BriefPage() {
               </h2>
             </div>
             {concepts.map((c, i) => (
-              <ConceptCard key={i} concept={c} idx={i + 1} />
+              <ConceptCard
+                key={i}
+                concept={c}
+                idx={i + 1}
+                onImagesUpdate={(images) => {
+                  setConcepts((prev) =>
+                    prev ? prev.map((pc, pi) => (pi === i ? { ...pc, images } : pc)) : prev,
+                  );
+                }}
+              />
             ))}
             <p className="text-center text-[12px] text-[#6b635c] mt-8 pt-6 border-t border-[#e6e0d6]">
               Это концепт-направления. Финальный дизайн делает Екатерина.{" "}
@@ -339,7 +349,50 @@ function Field({
 const inputCls =
   "w-full px-3 py-2.5 bg-[#faf7f2] border border-[#e6e0d6] rounded text-[14px] text-[#2b2724] placeholder:text-[#b8ada0] focus:outline-none focus:border-[#8a7a66] transition";
 
-function ConceptCard({ concept: c, idx }: { concept: Concept; idx: number }) {
+function ConceptCard({
+  concept: c,
+  idx,
+  onImagesUpdate,
+}: {
+  concept: Concept;
+  idx: number;
+  onImagesUpdate: (images: Image[]) => void;
+}) {
+  const [regenLoading, setRegenLoading] = useState(false);
+  const [regenError, setRegenError] = useState<string | null>(null);
+  const [regenPage, setRegenPage] = useState(1);
+
+  const hasRealImages = !!(c.images && c.images.some((i) => i.url));
+
+  async function regenerate() {
+    if (regenLoading) return;
+    setRegenError(null);
+    setRegenLoading(true);
+    const nextPage = regenPage + 1;
+    try {
+      const r = await fetch(REGEN_URL, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          pexels_queries: c.pexels_queries || [],
+          image_prompts: c.image_prompts || [],
+          page: nextPage,
+        }),
+      });
+      const data = await r.json();
+      if (!r.ok) {
+        setRegenError(data?.error || `Ошибка ${r.status}`);
+      } else if (Array.isArray(data.images)) {
+        onImagesUpdate(data.images);
+        setRegenPage(nextPage);
+      }
+    } catch (err) {
+      setRegenError(err instanceof Error ? err.message : "Сетевая ошибка");
+    } finally {
+      setRegenLoading(false);
+    }
+  }
+
   return (
     <article className="bg-white border border-[#e6e0d6] rounded-md p-6 md:p-10 mb-6">
       <header className="flex gap-5 items-start mb-8 pb-6 border-b border-[#e6e0d6]">
@@ -354,7 +407,38 @@ function ConceptCard({ concept: c, idx }: { concept: Concept; idx: number }) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
         <div className="md:col-span-2">
-          <BlockTitle>Визуальные референсы</BlockTitle>
+          <div className="flex items-center justify-between mb-3">
+            <BlockTitle className="!mb-0">Визуальные референсы</BlockTitle>
+            {hasRealImages && (
+              <button
+                type="button"
+                onClick={regenerate}
+                disabled={regenLoading}
+                className="text-[11px] tracking-[0.15em] uppercase text-[#8a7a66] hover:text-[#2b2724] disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-1.5"
+              >
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className={regenLoading ? "animate-spin" : ""}
+                >
+                  <path d="M3 12a9 9 0 0 1 15-6.7L21 8" />
+                  <path d="M21 3v5h-5" />
+                  <path d="M21 12a9 9 0 0 1-15 6.7L3 16" />
+                  <path d="M3 21v-5h5" />
+                </svg>
+                {regenLoading ? "Обновляю..." : "Обновить фото"}
+              </button>
+            )}
+          </div>
+          {regenError && (
+            <div className="mb-3 text-[11px] text-red-600">{regenError}</div>
+          )}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {(c.images && c.images.length ? c.images : c.image_prompts.map((p) => ({ prompt: p, url: null, photographer: null, page: null, query: null }))).map((img, i) => (
               <figure key={i}>
