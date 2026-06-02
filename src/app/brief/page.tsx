@@ -360,7 +360,6 @@ function ConceptCard({
 }) {
   const [regenLoading, setRegenLoading] = useState(false);
   const [regenError, setRegenError] = useState<string | null>(null);
-  const [regenPage, setRegenPage] = useState(1);
 
   const hasRealImages = !!(c.images && c.images.some((i) => i.url));
 
@@ -368,7 +367,6 @@ function ConceptCard({
     if (regenLoading) return;
     setRegenError(null);
     setRegenLoading(true);
-    const nextPage = regenPage + 1;
     try {
       const r = await fetch(REGEN_URL, {
         method: "POST",
@@ -376,7 +374,6 @@ function ConceptCard({
         body: JSON.stringify({
           pexels_queries: c.pexels_queries || [],
           image_prompts: c.image_prompts || [],
-          page: nextPage,
         }),
       });
       const data = await r.json();
@@ -384,7 +381,6 @@ function ConceptCard({
         setRegenError(data?.error || `Ошибка ${r.status}`);
       } else if (Array.isArray(data.images)) {
         onImagesUpdate(data.images);
-        setRegenPage(nextPage);
       }
     } catch (err) {
       setRegenError(err instanceof Error ? err.message : "Сетевая ошибка");
