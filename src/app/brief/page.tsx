@@ -67,6 +67,13 @@ const TILE_GRADIENTS = [
   "linear-gradient(135deg, #ede4d4, #a89578)",
 ];
 
+const ROOM_CHIPS = ["Гостиная", "Спальня", "Кухня-гостиная", "Детская", "Ванная", "Кабинет"];
+const PEOPLE_CHIPS = ["Пара без детей", "Семья с детьми", "Одиночка", "Семья и питомцы"];
+const STYLE_CHIPS = ["Минимализм", "Japandi", "Скандинавский", "Тёплый минимализм", "Не знаю"];
+
+const WA_PHONE = "79660444333";
+const TG_HANDLE = "KetDPln";
+
 export default function BriefPage() {
   const [form, setForm] = useState<FormState>(EMPTY);
   const [loading, setLoading] = useState(false);
@@ -135,12 +142,12 @@ export default function BriefPage() {
         <form onSubmit={submit} className="bg-white border border-[#e6e0d6] rounded-md p-6 md:p-10 mb-8">
           <SectionLabel>1 · Обязательное</SectionLabel>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
-            <Field label="Помещение *" hint="гостиная / спальня / кухня-гостиная / детская / ванная">
-              <input
+            <Field label="Помещение *" hint="выберите тип или впишите свой">
+              <ChipsInput
                 value={form.room}
-                onChange={(e) => update("room", e.target.value)}
+                onChange={(v) => update("room", v)}
+                chips={ROOM_CHIPS}
                 placeholder="Гостиная"
-                className={inputCls}
               />
             </Field>
             <div className="grid grid-cols-2 gap-5">
@@ -161,12 +168,12 @@ export default function BriefPage() {
                 />
               </Field>
             </div>
-            <Field label="Кто живёт *" hint="пара / семья с детьми (возраст) / одиночка / питомцы">
-              <input
+            <Field label="Кто живёт *" hint="можно дописать детали — возраст детей, питомцы">
+              <ChipsInput
                 value={form.people}
-                onChange={(e) => update("people", e.target.value)}
+                onChange={(v) => update("people", v)}
+                chips={PEOPLE_CHIPS}
                 placeholder="Молодая пара, без детей"
-                className={inputCls}
               />
             </Field>
             <Field label="Бюджет *" hint="эконом / средний / комфорт / премиум">
@@ -203,12 +210,12 @@ export default function BriefPage() {
                 className={inputCls}
               />
             </Field>
-            <Field label="Стиль-ориентир" hint="минимализм, Japandi, лофт — или 'не знаю'">
-              <input
+            <Field label="Стиль-ориентир" hint="выберите близкое или впишите своё">
+              <ChipsInput
                 value={form.style}
-                onChange={(e) => update("style", e.target.value)}
+                onChange={(v) => update("style", v)}
+                chips={STYLE_CHIPS}
                 placeholder="Тёплый минимализм"
-                className={inputCls}
               />
             </Field>
             <Field label="Что НЕ нравится" hint="работает лучше чем 'что нравится'" wide>
@@ -300,17 +307,7 @@ export default function BriefPage() {
                 }}
               />
             ))}
-            <p className="text-center text-[12px] text-[#6b635c] mt-8 pt-6 border-t border-[#e6e0d6]">
-              Это концепт-направления. Финальный дизайн делает Екатерина.{" "}
-              <a
-                href="https://wa.me/79660444333"
-                target="_blank"
-                rel="noreferrer"
-                className="underline hover:text-[#2b2724]"
-              >
-                Написать в WhatsApp
-              </a>
-            </p>
+            <SendToEkaterina form={form} concepts={concepts} onUpdate={update} />
           </section>
         )}
       </div>
@@ -348,6 +345,49 @@ function Field({
 
 const inputCls =
   "w-full px-3 py-2.5 bg-[#faf7f2] border border-[#e6e0d6] rounded text-[14px] text-[#2b2724] placeholder:text-[#b8ada0] focus:outline-none focus:border-[#8a7a66] transition";
+
+function ChipsInput({
+  value,
+  onChange,
+  chips,
+  placeholder,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  chips: string[];
+  placeholder?: string;
+}) {
+  return (
+    <div>
+      <div className="flex flex-wrap gap-1.5 mb-2">
+        {chips.map((c) => {
+          const active = value.trim().toLowerCase() === c.toLowerCase();
+          return (
+            <button
+              key={c}
+              type="button"
+              onClick={() => onChange(c)}
+              className={
+                "px-2.5 py-1 text-[12px] rounded-full border transition " +
+                (active
+                  ? "bg-[#2b2724] border-[#2b2724] text-white"
+                  : "bg-white border-[#e6e0d6] text-[#6b635c] hover:border-[#8a7a66] hover:text-[#2b2724]")
+              }
+            >
+              {c}
+            </button>
+          );
+        })}
+      </div>
+      <input
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className={inputCls}
+      />
+    </div>
+  );
+}
 
 function ConceptCard({
   concept: c,
@@ -524,6 +564,109 @@ function ConceptCard({
         </div>
       </div>
     </article>
+  );
+}
+
+function SendToEkaterina({
+  form,
+  concepts,
+  onUpdate,
+}: {
+  form: FormState;
+  concepts: Concept[];
+  onUpdate: <K extends keyof FormState>(k: K, v: string) => void;
+}) {
+  function buildMessage() {
+    const lines = ["Здравствуйте, Екатерина. Заполнил(а) бриф на сайте:"];
+    if (form.room || form.area) {
+      const summary = [form.room, form.area && `${form.area} м²`, form.budget].filter(Boolean).join(", ");
+      lines.push(`• ${summary}`);
+    }
+    if (form.people) lines.push(`• Кто живёт: ${form.people}`);
+    if (form.style) lines.push(`• Стиль: ${form.style}`);
+    lines.push("");
+    lines.push(`Получил(а) ${concepts.length} концепции: ${concepts.map((c) => c.name).join(", ")}.`);
+    lines.push("Хочу обсудить.");
+    if (form.name) lines.push("");
+    if (form.name) lines.push(`Меня зовут ${form.name}.`);
+    return lines.join("\n");
+  }
+
+  function openWhatsApp() {
+    const text = encodeURIComponent(buildMessage());
+    window.open(`https://wa.me/${WA_PHONE}?text=${text}`, "_blank", "noopener,noreferrer");
+  }
+
+  function openTelegram() {
+    const text = encodeURIComponent(buildMessage());
+    window.open(`https://t.me/${TG_HANDLE}?text=${text}`, "_blank", "noopener,noreferrer");
+  }
+
+  return (
+    <section className="mt-10 bg-[#2b2724] text-white rounded-md p-6 md:p-10">
+      <p className="text-[10px] tracking-[0.28em] uppercase text-[#c4b5a0] mb-3">
+        Следующий шаг
+      </p>
+      <h3 className="font-light text-[1.5rem] md:text-[1.75rem] tracking-tight mb-3">
+        Отправьте эти концепции Екатерине
+      </h3>
+      <p className="text-[14px] text-[#c4b5a0] mb-6 max-w-[560px]">
+        Бриф и список концепций подставятся в сообщение автоматически. Екатерина увидит вашу подачу
+        и предложит, с какого направления начать.
+      </p>
+
+      {(!form.name || !form.contact) && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 max-w-[560px]">
+          {!form.name && (
+            <label className="block">
+              <div className="text-[11px] tracking-[0.15em] uppercase text-[#c4b5a0] mb-1.5">
+                Как вас зовут
+              </div>
+              <input
+                value={form.name}
+                onChange={(e) => onUpdate("name", e.target.value)}
+                placeholder="Анна"
+                className="w-full px-3 py-2.5 bg-[#3a3531] border border-[#4a4744] rounded text-[14px] text-white placeholder:text-[#8a7a66] focus:outline-none focus:border-[#c4b5a0] transition"
+              />
+            </label>
+          )}
+          {!form.contact && (
+            <label className="block">
+              <div className="text-[11px] tracking-[0.15em] uppercase text-[#c4b5a0] mb-1.5">
+                Контакт (если хотите)
+              </div>
+              <input
+                value={form.contact}
+                onChange={(e) => onUpdate("contact", e.target.value)}
+                placeholder="+7 ... или @username"
+                className="w-full px-3 py-2.5 bg-[#3a3531] border border-[#4a4744] rounded text-[14px] text-white placeholder:text-[#8a7a66] focus:outline-none focus:border-[#c4b5a0] transition"
+              />
+            </label>
+          )}
+        </div>
+      )}
+
+      <div className="flex flex-wrap gap-3">
+        <button
+          type="button"
+          onClick={openWhatsApp}
+          className="px-6 py-3 bg-[#25d366] text-white text-sm font-medium rounded hover:bg-[#1fb858] transition"
+        >
+          Отправить в WhatsApp
+        </button>
+        <button
+          type="button"
+          onClick={openTelegram}
+          className="px-6 py-3 bg-[#229ed9] text-white text-sm font-medium rounded hover:bg-[#1e8bc0] transition"
+        >
+          Отправить в Telegram
+        </button>
+      </div>
+
+      <p className="text-[11px] text-[#8a7a66] mt-5">
+        Откроется мессенджер с готовым сообщением — останется нажать «отправить».
+      </p>
+    </section>
   );
 }
 
