@@ -283,6 +283,13 @@ export default function BriefPage() {
           <p className="text-[12px] text-[#6b635c] mt-3">
             Генерация занимает 20–40 секунд. Запрос идёт в Anthropic Claude.
           </p>
+          <p className="text-[11px] text-[#8a8276] mt-2">
+            Отправляя бриф, вы соглашаетесь с{" "}
+            <a href="/privacy" className="underline underline-offset-2 hover:text-[#2b2724]">
+              политикой конфиденциальности
+            </a>
+            .
+          </p>
         </form>
 
         {concepts && (
