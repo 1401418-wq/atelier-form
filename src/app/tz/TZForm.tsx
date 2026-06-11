@@ -1,24 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { SECTIONS, Field, Section } from "./sections";
-
-function readKeyFromHash(): string | null {
-  if (typeof window === "undefined") return null;
-  const m = window.location.hash.match(/[#&]k=([^&]+)/);
-  return m ? decodeURIComponent(m[1]) : null;
-}
-
-function subscribeHash(cb: () => void) {
-  if (typeof window === "undefined") return () => {};
-  window.addEventListener("hashchange", cb);
-  return () => window.removeEventListener("hashchange", cb);
-}
-
-function useAccessKey(): string | null {
-  return useSyncExternalStore(subscribeHash, readKeyFromHash, () => null);
-}
 
 const BACKEND_URL = "https://web-production-336017.up.railway.app/tz";
 const STORAGE_KEY = "tz-draft-v1";
@@ -61,10 +45,17 @@ export default function TZPage() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState<{ id: string; viewUrl: string } | null>(null);
   const [hydrated, setHydrated] = useState(false);
-  const accessKey = useAccessKey();
+  const [accessKey, setAccessKey] = useState<string | null>(null);
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
+    console.log("[tz] mount effect, hash:", window.location.hash);
+    const m = window.location.hash.match(/[#&]k=([^&]+)/);
+    if (m) {
+      const k = decodeURIComponent(m[1]);
+      console.log("[tz] setting accessKey:", k);
+      setAccessKey(k);
+    }
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
