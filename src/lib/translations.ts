@@ -12,7 +12,6 @@ export const translations = {
       about: "О студии",
       contact: "Контакты",
       brief: "Концепция",
-      tz: "Бриф клиента",
     },
 
     hero: {
@@ -151,7 +150,6 @@ export const translations = {
       about: "About",
       contact: "Contact",
       brief: "Concept",
-      tz: "Client brief",
     },
 
     hero: {

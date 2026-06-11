@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { FadeIn } from "@/components/ui/FadeIn";
 import type { Locale } from "@/lib/translations";
 
@@ -10,9 +9,6 @@ const content = {
   ru: {
     label: "ПРОЦЕСС",
     title: ["От первой встречи", "до реализации"],
-    brief_label: "Для подписавшихся клиентов",
-    brief_text: "После заключения договора мы пришлём подробный бриф — техническое задание на 19 разделов: от планировки и сантехники до света, отделки и эстетики. Заполняется онлайн, черновик сохраняется автоматически.",
-    brief_cta: "Открыть бриф →",
     steps: [
       {
         num: "01",
@@ -39,9 +35,6 @@ const content = {
   en: {
     label: "PROCESS",
     title: ["From first meeting", "to completion"],
-    brief_label: "For signed clients",
-    brief_text: "After signing the contract we share a detailed brief — a technical assignment across 19 sections covering layout, plumbing, lighting, finishing and aesthetics. Filled out online, draft is saved automatically.",
-    brief_cta: "Open the brief →",
     steps: [
       {
         num: "01",
@@ -112,25 +105,6 @@ export function Approach({ locale }: ApproachProps) {
             ))}
             {/* Closing border after last step */}
             <div className="border-b border-border" />
-
-            <FadeIn delay={400}>
-              <div className="mt-8 md:mt-10 flex flex-col md:flex-row md:items-center gap-4 md:gap-8 p-6 md:p-7 border border-border bg-[#faf7f2]">
-                <div className="flex-1">
-                  <p className="text-[10px] tracking-[0.28em] text-muted uppercase mb-2">
-                    {t.brief_label}
-                  </p>
-                  <p className="text-[0.9375rem] leading-[1.7] text-[#4A4744]">
-                    {t.brief_text}
-                  </p>
-                </div>
-                <Link
-                  href="/tz"
-                  className="label text-[#8a7a66] hover:text-[#4A4744] transition-colors shrink-0"
-                >
-                  {t.brief_cta}
-                </Link>
-              </div>
-            </FadeIn>
           </div>
 
         </div>
