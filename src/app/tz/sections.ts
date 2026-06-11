@@ -1,0 +1,473 @@
+export type FieldType = "text" | "textarea" | "chips" | "multiChips" | "select";
+
+export type Field = {
+  id: string;
+  label: string;
+  hint?: string;
+  type: FieldType;
+  options?: string[];
+  placeholder?: string;
+  wide?: boolean;
+  rows?: number;
+};
+
+export type Section = {
+  id: string;
+  title: string;
+  subtitle?: string;
+  optional?: boolean;
+  fields: Field[];
+};
+
+export const SECTIONS: Section[] = [
+  {
+    id: "general",
+    title: "Общее",
+    subtitle: "Адрес, площадь, кто живёт, для чего квартира",
+    fields: [
+      { id: "address", label: "Адрес", type: "text", placeholder: "Москва, ул. ...", wide: true },
+      { id: "area_bti", label: "Площадь по экспликации БТИ", hint: "м²", type: "text", placeholder: "78,5" },
+      { id: "ceiling", label: "Высота потолков", hint: "м", type: "text", placeholder: "2,75" },
+      {
+        id: "purpose",
+        label: "Для чего будет использоваться квартира",
+        type: "chips",
+        options: ["Проживание", "Сдача в аренду", "Инвестирование"],
+      },
+      { id: "family", label: "Кто живёт", hint: "члены семьи, возраст детей, питомцы", type: "textarea", wide: true, rows: 2 },
+      {
+        id: "layout",
+        label: "Планировка",
+        type: "chips",
+        options: ["От застройщика, оставить", "Перепланировка", "Готовы рассматривать оба варианта"],
+      },
+      { id: "balcony", label: "Балкон / лоджия", hint: "под кабинет, под зону отдыха, объединение с комнатой, оставить", type: "textarea", wide: true, rows: 2 },
+      { id: "existing_furniture", label: "Существующая мебель, которую нужно вписать", hint: "что хочется оставить и встроить в новый дизайн", type: "textarea", wide: true, rows: 3 },
+    ],
+  },
+  {
+    id: "demolition",
+    title: "Демонтаж и монтаж",
+    subtitle: "Стены, перегородки, шумоизоляция",
+    fields: [
+      { id: "demo_existing", label: "Демонтаж существующих перегородок от застройщика", type: "chips", options: ["Да, полностью", "Частично", "Нет"] },
+      {
+        id: "new_walls_material",
+        label: "Монтаж новых перегородок — материал",
+        hint: "можно несколько",
+        type: "multiChips",
+        options: ["Пазогребневая плита (ПГП)", "Пеноблок", "Газоблок", "Кирпич", "Гипсокартон (ГКЛ на металлокаркасе)"],
+      },
+      {
+        id: "soundproofing",
+        label: "Шумоизоляция",
+        hint: "где нужна",
+        type: "multiChips",
+        options: ["Стены", "Потолки", "Пол", "Не нужна"],
+      },
+      { id: "soundproofing_rooms", label: "В каких помещениях шумоизоляция", type: "text", placeholder: "спальня, детская", wide: true },
+      { id: "doorway_size", label: "Высота и ширина межкомнатных проёмов", hint: "размер полотна", type: "text", placeholder: "2100 × 800 мм", wide: true },
+    ],
+  },
+  {
+    id: "hallway",
+    title: "Прихожая и гардеробная",
+    fields: [
+      {
+        id: "wardrobe_type",
+        label: "Шкаф для верхней одежды",
+        type: "chips",
+        options: ["Шкаф-купе", "Распашной", "Открытая гардеробная", "Закрытая гардеробная"],
+      },
+      { id: "bench", label: "Банкетка / место присесть", type: "chips", options: ["Да", "Нет"] },
+      { id: "shoes", label: "Место для обуви (обувница)", type: "chips", options: ["Открытая", "Закрытая в шкафу", "Не нужна"] },
+      { id: "mirror", label: "Зеркало", type: "chips", options: ["С подсветкой", "Без подсветки", "Не нужно"] },
+      { id: "hallway_notes", label: "Что ещё важно по прихожей", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+  {
+    id: "kitchen",
+    title: "Кухня",
+    fields: [
+      { id: "kitchen_type", label: "Планировка кухни", type: "chips", options: ["Изолированная", "Кухня-столовая (совмещена с гостиной)"] },
+      { id: "glass_partition", label: "Стеклянная перегородка между кухней и гостиной", hint: "обязательна, если на кухне газ", type: "chips", options: ["Да", "Нет"] },
+      {
+        id: "dining_zone",
+        label: "Обеденная зона",
+        type: "multiChips",
+        options: ["Обеденный стол", "Барная стойка", "Кухонный остров"],
+      },
+      { id: "dining_size", label: "Размер обеденного стола", hint: "если известен", type: "text", placeholder: "180 × 90 см" },
+      { id: "hob", label: "Варочная панель", type: "chips", options: ["Газовая", "Электрическая", "Индукционная"] },
+      { id: "hob_burners", label: "Количество конфорок", type: "chips", options: ["2", "3", "4", "5"] },
+      { id: "fridge", label: "Холодильник", type: "chips", options: ["Встроенный", "Отдельно стоящий", "Двухдверный Side-by-Side"] },
+      { id: "dishwasher", label: "Посудомоечная машина", type: "chips", options: ["Встроенная 45 см", "Встроенная 60 см", "Не нужна"] },
+      { id: "oven", label: "Духовой шкаф", type: "chips", options: ["В пенал на уровне глаз", "Внизу под варочной", "Не нужен"] },
+      { id: "microwave", label: "СВЧ-печь", type: "chips", options: ["Встроенная в пенал", "Отдельно стоящая", "Не нужна"] },
+      {
+        id: "extra_tech",
+        label: "Дополнительная техника",
+        type: "multiChips",
+        options: ["Встроенная кофемашина", "Винный шкаф", "Отдельно стоящая техника", "Ничего лишнего"],
+      },
+      { id: "hood", label: "Вытяжка", type: "chips", options: ["Встроенная в шкаф", "Купольная", "Наклонная", "Островная", "Встроенная в варочную панель"] },
+      { id: "hood_mode", label: "Режим работы вытяжки", type: "chips", options: ["В вентиляционную шахту", "Рециркуляция (угольные фильтры)"] },
+      { id: "sink", label: "Мойка", type: "chips", options: ["Одинарная чаша", "Двойная", "Угловая", "С крылом для сушки"] },
+      { id: "sink_size", label: "Размер мойки", type: "text", placeholder: "50 × 40 см" },
+      { id: "disposer", label: "Измельчитель отходов (диспоузер)", type: "chips", options: ["Да", "Нет"] },
+      { id: "tv_kitchen", label: "ТВ-зона на кухне", type: "chips", options: ["Да", "Нет"] },
+      { id: "kitchen_notes", label: "Что ещё важно по кухне", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+  {
+    id: "bath_master",
+    title: "Санузел — мастер",
+    subtitle: "Хозяйский санузел",
+    fields: [
+      { id: "wc", label: "Унитаз", type: "chips", options: ["Напольный отдельно стоящий", "Подвесной с инсталляцией"] },
+      {
+        id: "wc_extras",
+        label: "Дополнительно",
+        type: "multiChips",
+        options: ["Биде отдельно стоящее", "Гигиенический душ", "Крышка-биде электронная (нужна розетка)"],
+      },
+      {
+        id: "bath_or_shower",
+        label: "Ванна или душ",
+        type: "multiChips",
+        options: ["Только ванна", "Только душ", "И ванна, и душ"],
+      },
+      { id: "bath_type", label: "Тип ванны", type: "chips", options: ["Пристенная прямоугольная", "Угловая", "Отдельно стоящая (нужен напольный смеситель)"] },
+      { id: "shower_type", label: "Душевая зона", type: "chips", options: ["Готовая кабина с поддоном", "Душевой уголок без поддона"] },
+      { id: "shower_drain", label: "Слив в душе (трап)", type: "chips", options: ["Длинный линейный лоток", "Скрытый пристенный", "Точечный"] },
+      { id: "shower_seat", label: "Сидушка в душевой зоне", type: "chips", options: ["Да", "Нет"] },
+      { id: "shower_mixer", label: "Смеситель в душе", type: "chips", options: ["Настенный открытый", "Встраиваемый из стены"] },
+      {
+        id: "shower_kit",
+        label: "Душевой комплект",
+        type: "multiChips",
+        options: ["Штанга с ручной лейкой", "Термостат (поддержание температуры)", "Тропический душ из стены", "Тропический душ из потолка"],
+      },
+      { id: "basin", label: "Раковина", type: "chips", options: ["Одинарная", "Двойная (или одна широкая с двумя смесителями)", "Накладная чаша на столешницу"] },
+      { id: "basin_mixer", label: "Смеситель раковины", type: "chips", options: ["Высокий на столешницу", "Стандартный на раковину", "Скрытый из стены"] },
+      { id: "bath_mirror", label: "Зеркало", type: "chips", options: ["Стандартное", "С LED-подсветкой", "С подогревом (антизапотевание)"] },
+      { id: "vanity", label: "Тумба под раковину", type: "chips", options: ["Подвесная (парящая)", "Напольная на ножках"] },
+      {
+        id: "bath_storage",
+        label: "Скрытые места хранения",
+        type: "multiChips",
+        options: ["Шкаф над инсталляцией унитаза", "Встроенные ниши для шампуней в зоне душа", "Высокий пенал"],
+      },
+      { id: "bath_master_notes", label: "Что ещё важно по санузлу", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+  {
+    id: "bath_guest",
+    title: "Санузел — гостевой",
+    optional: true,
+    subtitle: "Если есть второй санузел",
+    fields: [
+      { id: "g_wc", label: "Унитаз", type: "chips", options: ["Отдельно стоящий", "С инсталляцией"] },
+      { id: "g_bath", label: "Ванна", type: "chips", options: ["Угловая", "Пристенная", "Отдельно стоящая", "Без ванны"] },
+      { id: "g_shower", label: "Душевая", type: "chips", options: ["Готовая кабина", "Душевой уголок", "Без душа"] },
+      { id: "g_shower_kit", label: "Душевой комплект", type: "multiChips", options: ["Встраиваемый смеситель", "Со штангой", "Тропический душ из стены", "Тропический душ из потолка"] },
+      { id: "g_shower_seat", label: "Сидушка в душевой", type: "chips", options: ["Да", "Нет"] },
+      { id: "g_basin", label: "Раковина", type: "chips", options: ["Одинарная", "Двойная", "Накладная чаша"] },
+      { id: "g_basin_mixer", label: "Смеситель раковины", type: "chips", options: ["Встраиваемый из стены", "На раковину"] },
+      { id: "g_extras", label: "Дополнительно", type: "multiChips", options: ["Гигиенический душ", "Биде"] },
+      { id: "bath_guest_notes", label: "Что ещё важно", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+  {
+    id: "bedroom",
+    title: "Спальня",
+    fields: [
+      { id: "bed_size", label: "Ширина матраса", type: "chips", options: ["1400 мм", "1600 мм", "1800 мм", "2000 мм"] },
+      { id: "headboard", label: "Изголовье кровати", type: "chips", options: ["Мягкое тканевое", "Деревянное", "Панели на всю стену", "Без изголовья"] },
+      { id: "bedside", label: "Прикроватные тумбы", type: "chips", options: ["Напольные", "Подвесные", "Не нужны"] },
+      { id: "bedside_size", label: "Размер тумб", type: "text", placeholder: "45 × 40 см" },
+      { id: "bedroom_wardrobe", label: "Шкаф / гардеробная", type: "chips", options: ["Встроенный шкаф до потолка", "Отдельная гардеробная комната"] },
+      { id: "wardrobe_facades", label: "Фасады шкафов", type: "chips", options: ["Глухие", "Зеркальные", "Тонированное стекло"] },
+      { id: "dresser", label: "Комод для белья", type: "chips", options: ["Да", "Нет"] },
+      { id: "vanity_table", label: "Макияжный столик", type: "chips", options: ["Да, с настенным зеркалом", "Да, со встроенной подсветкой", "Нет"] },
+      { id: "bedroom_office", label: "Рабочее место в спальне", hint: "стол, кресло, розетки для ноутбука", type: "chips", options: ["Да", "Нет"] },
+      { id: "bedroom_tv", label: "ТВ-зона в спальне", type: "chips", options: ["На стену", "На комод", "Нет"] },
+      { id: "bedroom_notes", label: "Что ещё важно", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+  {
+    id: "office",
+    title: "Кабинет",
+    optional: true,
+    fields: [
+      { id: "office_setup", label: "Рабочее оборудование", type: "multiChips", options: ["Большой монитор", "Ноутбук", "Два монитора", "Стационарный ПК"] },
+      { id: "office_extra_tech", label: "Дополнительная техника", type: "multiChips", options: ["Принтер", "Сканер", "МФУ"] },
+      { id: "office_furniture", label: "Мебель", type: "multiChips", options: ["Стол", "Шкаф для книг", "Гардеробная", "Шкафы"] },
+      { id: "office_tv", label: "ТВ-зона", type: "chips", options: ["Да", "Нет"] },
+      { id: "office_notes", label: "Что ещё важно", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+  {
+    id: "kids",
+    title: "Детская / подростковая",
+    optional: true,
+    fields: [
+      { id: "kid_age", label: "Возраст ребёнка", type: "text", placeholder: "8 лет" },
+      { id: "kid_bed", label: "Спальное место", type: "chips", options: ["Полноценная кровать", "Раскладной диван", "Кровать-трансформер в гарнитуре"] },
+      { id: "kid_bed_position", label: "Расположение кровати", type: "chips", options: ["В углу комнаты", "По центру стены с доступом с двух сторон"] },
+      { id: "kid_bedside", label: "Прикроватные тумбы", type: "chips", options: ["Напольные", "Подвесные", "Не нужны"] },
+      { id: "kid_desk", label: "Письменный стол", type: "chips", options: ["Стандартный прямой", "Угловой", "Единая столешница вдоль окна"] },
+      { id: "kid_storage", label: "Хранение книг", type: "chips", options: ["Открытый стеллаж", "Подвесные полки над столом", "Закрытые шкафы"] },
+      { id: "kid_sport", label: "Спортивная зона", type: "multiChips", options: ["Шведская стенка", "Турник", "Спортивный уголок"] },
+      { id: "kid_wardrobe", label: "Шкаф / гардеробная", type: "chips", options: ["Встроенный шкаф до потолка", "Отдельная гардеробная"] },
+      { id: "kid_tv", label: "ТВ-зона", type: "chips", options: ["На стену", "Под игровую приставку", "Нет"] },
+      { id: "kids_notes", label: "Что ещё важно", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+  {
+    id: "pets",
+    title: "Животные и растения",
+    optional: true,
+    fields: [
+      { id: "pets_kind", label: "Вид и количество животных", type: "text", placeholder: "кот, 1", wide: true },
+      { id: "pets_zones", label: "Зоны для животных", hint: "место приёма пищи, сна, туалета, аквариумы, клетки", type: "textarea", wide: true, rows: 2 },
+      { id: "plants", label: "Домашние растения", hint: "где расположены, что-то крупное", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+  {
+    id: "utility",
+    title: "Хозблок и хранение",
+    fields: [
+      { id: "washer", label: "Стиральная и сушильная машины", type: "chips", options: ["В колонну (друг над другом)", "В один ряд под столешницу", "Только стиральная"] },
+      { id: "drying", label: "Отдельная раскладная сушка для белья", type: "chips", options: ["Да", "Нет"] },
+      {
+        id: "steamer",
+        label: "Дополнительная техника",
+        type: "multiChips",
+        options: ["Напольный отпариватель", "Паровая система", "Сушка для обуви"],
+      },
+      {
+        id: "ironing",
+        label: "Гладильная доска",
+        type: "chips",
+        options: ["Встроенная в шкаф", "Напольная отдельная", "Откатная с зеркалом", "Не нужна"],
+      },
+      { id: "vacuum_niche", label: "Вертикальный отсек для пылесоса с розеткой", type: "chips", options: ["Да", "Нет"] },
+      { id: "mop_storage", label: "Место для швабры, ведра, бытовой химии", type: "chips", options: ["Да", "Нет"] },
+      { id: "safe", label: "Скрытый сейф", type: "chips", options: ["Да", "Нет"] },
+      { id: "safe_size", label: "Размер сейфа (ВхШхГ, см)", type: "text", placeholder: "40 × 30 × 30" },
+      { id: "extra_storage", label: "Что ещё хранить", hint: "чемоданы, стремянка, ёлка, инструменты", type: "textarea", wide: true, rows: 2 },
+      { id: "hobby_items", label: "Предметы увлечений", hint: "пианино, гитара, книги, картины — размеры если знаете", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+  {
+    id: "doors",
+    title: "Межкомнатные двери",
+    fields: [
+      { id: "door_size", label: "Высота и ширина полотна", type: "text", placeholder: "2100 × 800 мм", wide: true },
+      { id: "door_casing", label: "Наличники", type: "chips", options: ["Стандартные", "Скрытого монтажа под покраску", "Без наличников"] },
+      { id: "door_type", label: "Тип дверей", type: "multiChips", options: ["Распашные", "Откатные в пенал", "Раздвижные накладные", "Двустворчатые", "«Книжка»"] },
+      { id: "door_stops", label: "Ограничители открывания", type: "chips", options: ["Скрытого монтажа", "Стандартные напольные", "Не нужны"] },
+      { id: "doors_notes", label: "Что ещё важно", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+  {
+    id: "floors",
+    title: "Полы",
+    fields: [
+      {
+        id: "floor_main",
+        label: "Основное напольное покрытие",
+        type: "chips",
+        options: ["Инженерная доска", "Паркет", "Кварц-винил SPC", "Ламинат", "Керамогранит / плитка"],
+      },
+      { id: "floor_pattern", label: "Раскладка", type: "chips", options: ["По прямой", "Английская ёлка", "Французская ёлка", "Диагональ"] },
+      { id: "floor_mount", label: "Способ крепления", type: "chips", options: ["Замковой", "Клеевой на фанеру"] },
+      { id: "floor_tile_zones", label: "В каких помещениях плитка / керамогранит", type: "text", placeholder: "санузлы, прихожая, кухня", wide: true },
+      {
+        id: "floor_joint",
+        label: "Стыки между разными покрытиями",
+        type: "chips",
+        options: ["Без порожков", "Скрытый пробковый компенсатор", "Жидкая пробка", "Т-образный профиль"],
+      },
+      {
+        id: "skirting",
+        label: "Напольный плинтус",
+        type: "chips",
+        options: ["Теневой профиль (эффект «парящей» стены)", "Встраиваемый скрытый плинтус с LED-подсветкой", "Встраиваемый скрытый без подсветки", "Классический накладной (МДФ, дюрополимер, дерево)"],
+      },
+      { id: "wardrobe_skirting", label: "Плинтус в шкафах и гардеробных", type: "chips", options: ["Нужен", "Не нужен"] },
+      { id: "warm_floor", label: "Тёплый пол (электрический)", type: "chips", options: ["Да", "Нет"] },
+      { id: "warm_floor_type", label: "Тип тёплого пола", type: "chips", options: ["Кабельный", "Маты под плитку", "Инфракрасный плёночный"] },
+      { id: "warm_floor_zones", label: "Зоны укладки тёплого пола", type: "multiChips", options: ["Прихожая", "Санузел", "Кухня", "Лоджия"] },
+      { id: "warm_floor_control", label: "Управление тёплым полом", type: "chips", options: ["Механические крутилки", "Электронные с экраном", "Программируемые"] },
+      { id: "floors_notes", label: "Что ещё важно", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+  {
+    id: "ceiling",
+    title: "Потолок",
+    fields: [
+      {
+        id: "ceiling_type",
+        label: "Конструкция и материал",
+        type: "chips",
+        options: ["Натяжной ПВХ матовый", "Натяжной сатиновый", "Натяжной тканевый", "Гипсокартон под покраску", "Многоуровневый", "Комбинированный (ГКЛ + натяжной)"],
+      },
+      {
+        id: "ceiling_edge",
+        label: "Профиль примыкания к стене",
+        type: "chips",
+        options: ["Теневой зазор / еврокраб", "Бесщелевой натяжной впритык", "Классический багет / галтель", "С эффектом парящего потолка и LED-подсветкой"],
+      },
+      {
+        id: "curtain_cornice",
+        label: "Шторные карнизы",
+        type: "chips",
+        options: ["Скрытая ниша в потолке", "Скрытая ниша в потолке с LED-подсветкой штор", "Накладной потолочный трек", "Настенный классический карниз"],
+      },
+      { id: "smart_curtains", label: "Электрокарнизы", hint: "управление с пульта / смартфона", type: "chips", options: ["Да", "Нет"] },
+      { id: "ceiling_notes", label: "Что ещё важно", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+  {
+    id: "lighting",
+    title: "Освещение и сценарии света",
+    fields: [
+      {
+        id: "main_light",
+        label: "Основное и направленное освещение",
+        type: "multiChips",
+        options: ["Точечные встроенные", "Точечные накладные", "Трековые встроенные", "Трековые накладные", "Споты поворотные", "Линейные светодиодные", "Люстры", "Подвесные акцентные", "Настенные бра"],
+      },
+      {
+        id: "led_decor",
+        label: "Декоративная LED-подсветка",
+        type: "multiChips",
+        options: ["Внутри шкафов", "Стеклянные витрины", "Рабочая зона кухни", "Подсветка подвесных тумб (парящий эффект)", "Ниши и полки в санузле", "По периметру зеркал", "По периметру ванны", "Шторные ниши", "По периметру потолка"],
+      },
+      { id: "motion_sensors", label: "Датчики движения для света", type: "chips", options: ["Да", "Нет"] },
+      {
+        id: "night_light",
+        label: "Ночное напольное освещение",
+        type: "multiChips",
+        options: ["Коридор", "Санузел", "Спальня", "Детская"],
+      },
+      { id: "master_switch", label: "Мастер-выключатель «Выключить всё» у входной двери", type: "chips", options: ["Да", "Нет"] },
+      { id: "lighting_notes", label: "Что ещё важно", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+  {
+    id: "engineering",
+    title: "Инженерия и сантехника",
+    fields: [
+      { id: "radiators", label: "Радиаторы", type: "chips", options: ["Оставить от застройщика", "Замена на новые", "Замена с изменением формы"] },
+      { id: "ac", label: "Кондиционирование", type: "multiChips", options: ["Сплит-системы по помещениям", "Канальные скрытые", "Не нужно"] },
+      { id: "ventilation", label: "Вентиляция", type: "multiChips", options: ["Естественная (от застройщика)", "Бризеры", "Приточная с диффузорами", "Дополнительные вытяжки в помещениях"] },
+      { id: "water_heater", label: "Водонагреватель", type: "chips", options: ["Проточный", "Накопительный", "Не нужен"] },
+      {
+        id: "towel_warmer",
+        label: "Полотенцесушитель",
+        type: "chips",
+        options: ["Водяной", "Электрический скрытого монтажа", "Электрический в розетку"],
+      },
+      { id: "leak_control", label: "Система контроля протечек с датчиками", type: "chips", options: ["Да", "Нет"] },
+      { id: "leak_zones", label: "Где ставить датчики протечек", type: "text", placeholder: "санузлы, кухня, котельная", wide: true },
+      { id: "water_filter", label: "Магистральные фильтры тонкой очистки", type: "chips", options: ["На холодную и горячую", "Только на холодную", "Нет"] },
+      { id: "drinking_filter", label: "Питьевой фильтр под кухонную раковину", type: "chips", options: ["Да, с розеткой под мойкой", "Без розетки", "Нет"] },
+      { id: "fire_alarm", label: "Противопожарные датчики от застройщика", type: "chips", options: ["Сохранить с переносом", "Сохранить на местах", "Демонтировать"] },
+      { id: "engineering_notes", label: "Что ещё важно", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+  {
+    id: "electrics",
+    title: "Техника и электрика",
+    fields: [
+      { id: "switchboard", label: "Силовой электрощит", type: "chips", options: ["Скрытый в стене", "Встроенный в шкаф прихожей"] },
+      { id: "led_drivers", label: "Блоки питания для LED-подсветок", type: "chips", options: ["Единое место в щите", "Распределены по мебели", "Комбинированно"] },
+      { id: "intercom", label: "Домофон", type: "chips", options: ["Видеодомофон", "Аудио-трубка", "От застройщика"] },
+      {
+        id: "security",
+        label: "Безопасность",
+        type: "multiChips",
+        options: ["Общая система охраны", "Видеокамеры внутри", "Видеокамеры снаружи", "Не нужно"],
+      },
+      { id: "security_camera_zones", label: "Где ставить камеры", type: "text", wide: true },
+      { id: "smart_home", label: "Система «Умный дом»", type: "chips", options: ["Да, базовый сценарий", "Да, полный сценарий", "Нет"] },
+      { id: "wifi_router", label: "Место для Wi-Fi роутера", type: "chips", options: ["В шкафу прихожей", "В слаботочном щите", "На усмотрение электрика"] },
+      {
+        id: "ethernet",
+        label: "Ethernet-розетки (проводной интернет)",
+        type: "multiChips",
+        options: ["К телевизорам", "К рабочему столу", "К игровым приставкам", "Не нужно"],
+      },
+      { id: "tvs", label: "Телевизоры — в каких помещениях", type: "text", placeholder: "гостиная, спальня, кухня", wide: true },
+      { id: "tv_mount", label: "Монтаж ТВ", type: "chips", options: ["Настенный", "Напольный", "На тумбе"] },
+      { id: "tv_cable", label: "Скрытый кабель-канал в стене (от тумбы до ТВ)", type: "chips", options: ["Да", "Нет"] },
+      {
+        id: "av_system",
+        label: "Домашний кинотеатр",
+        type: "chips",
+        options: ["Акустика 5.1", "Саундбар", "Видеопроектор с экраном на стене", "Видеопроектор с экраном из потолка", "Нет"],
+      },
+      {
+        id: "extra_sockets",
+        label: "Специальные розетки",
+        type: "multiChips",
+        options: ["Под увлажнители воздуха", "Под электрокамин", "Под новогодние гирлянды в откосах окон", "Под гирлянды под потолком", "Шлюз для электрокарнизов штор", "Напольные лючки в полу"],
+      },
+      { id: "electrics_notes", label: "Что ещё важно", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+  {
+    id: "finishing",
+    title: "Финишная отделка",
+    fields: [
+      {
+        id: "wall_finish",
+        label: "Материал отделки стен",
+        type: "multiChips",
+        options: ["Обои флизелиновые", "Обои текстильные", "Обои под покраску", "Покраска матовая", "Покраска моющаяся", "Микроцемент", "Декоративная штукатурка", "Керамогранит / плитка", "Стеновые панели МДФ", "Стеновые панели дерево / шпон", "Рейки", "Мягкие панели"],
+      },
+      { id: "wall_finish_zones", label: "Где какой материал", hint: "например: гостиная — покраска, прихожая — микроцемент", type: "textarea", wide: true, rows: 2 },
+      { id: "corner_protection", label: "Защита внешних углов стен", type: "chips", options: ["Металлические уголки под шпаклевку", "Декоративные уголки", "Без защиты (под покраску)"] },
+      {
+        id: "sills",
+        label: "Подоконники",
+        type: "chips",
+        options: ["Натуральный или искусственный камень", "Натуральное дерево / шпонированный МДФ", "Пластик ПВХ", "Керамогранит в цвет стен или пола"],
+      },
+      {
+        id: "window_slopes",
+        label: "Откосы окон и лоджий",
+        type: "chips",
+        options: ["Под покраску (классические штукатурные)", "Накладные панели — дерево / МДФ", "Накладные панели — камень", "Закрыты декоративным наличником"],
+      },
+      {
+        id: "entry_door_slopes",
+        label: "Откосы входной двери",
+        type: "chips",
+        options: ["Доборы и наличники в цвет межкомнатных дверей", "Под покраску", "Декоративная штукатурка", "Керамогранит / декоративный камень", "Ламинат"],
+      },
+      { id: "finishing_notes", label: "Что ещё важно", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+  {
+    id: "aesthetics",
+    title: "Эстетика и стиль",
+    subtitle: "Самое важное — на ощупь и на глаз",
+    fields: [
+      {
+        id: "style_consistency",
+        label: "Стиль",
+        type: "chips",
+        options: ["Единый стиль во всех помещениях", "Разный стиль в комнатах"],
+      },
+      { id: "style_desc", label: "Какой именно стиль", hint: "если знаете название или направление", type: "textarea", wide: true, rows: 2 },
+      { id: "anchor_object", label: "Любимая вещь — предмет-основа для стилистики", hint: "картина, ковёр, семейная реликвия, мебель", type: "textarea", wide: true, rows: 2 },
+      { id: "color_pref", label: "Цветовые предпочтения", hint: "пастельные / контрастные / монотонные / несколько ярких акцентов", type: "textarea", wide: true, rows: 2 },
+      { id: "color_no", label: "Неприятные цвета", hint: "что категорически не хочется", type: "textarea", wide: true, rows: 2 },
+      { id: "taboo", label: "Табу в интерьере", hint: "например: золото, лепнина, открытые полки, мрамор", type: "textarea", wide: true, rows: 2 },
+    ],
+  },
+];

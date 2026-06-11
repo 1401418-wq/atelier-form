@@ -32,6 +32,7 @@ export function Navigation({ locale }: NavProps) {
     { href: `/${safeLocale}#approach`, label: t.nav.approach },
     { href: `/${safeLocale}#contact`, label: t.nav.contact },
     { href: `/brief`, label: t.nav.brief, accent: true },
+    { href: `/tz`, label: t.nav.tz, muted: true },
   ];
 
   return (
@@ -61,6 +62,8 @@ export function Navigation({ locale }: NavProps) {
                   "label transition-colors duration-300",
                   link.accent
                     ? "text-[#8a7a66] hover:text-[#4A4744]"
+                    : link.muted
+                    ? "text-muted hover:text-foreground"
                     : "hover:text-foreground"
                 )}
               >
@@ -97,7 +100,11 @@ export function Navigation({ locale }: NavProps) {
                 onClick={() => setMenuOpen(false)}
                 className={clsx(
                   "font-display text-4xl font-light hover:text-muted transition-colors",
-                  link.accent ? "text-[#8a7a66]" : "text-foreground"
+                  link.accent
+                    ? "text-[#8a7a66]"
+                    : link.muted
+                    ? "text-muted text-2xl"
+                    : "text-foreground"
                 )}
               >
                 {link.label}
