@@ -49,12 +49,11 @@ export default function TZPage() {
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
-    console.log("[tz] mount effect, hash:", window.location.hash);
+    (window as unknown as { __tzMounted?: boolean }).__tzMounted = true;
     const m = window.location.hash.match(/[#&]k=([^&]+)/);
     if (m) {
-      const k = decodeURIComponent(m[1]);
-      console.log("[tz] setting accessKey:", k);
-      setAccessKey(k);
+      (window as unknown as { __tzKey?: string }).__tzKey = decodeURIComponent(m[1]);
+      setAccessKey(decodeURIComponent(m[1]));
     }
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
