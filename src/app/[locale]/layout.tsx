@@ -63,7 +63,7 @@ export default async function LocaleLayout({
       <main>{children}</main>
       <div className="border-t border-border">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-          <p className="label">© 2026 Design Planner · Привалова Е. В. · ИНН 771401500285</p>
+          <p className="label">© 2026 Design Planner · ИНН 771401500285</p>
           <Link href="/privacy" className="label hover:text-foreground transition-colors">
             {privacyLabel}
           </Link>
