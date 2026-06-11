@@ -63,11 +63,9 @@ const content = {
         price: "8 500 ₽/м²",
         badge: null as string | null,
         description:
-          "Максимальная проработка проекта с визуализацией, подбором и сопровождением реализации.",
+          "Максимальная проработка проекта с авторским сопровождением реализации.",
         items: [
           "Всё из базового проекта",
-          "Подбор отделочных материалов",
-          "3D-визуализация / 3D-тур по объекту",
           "Авторское сопровождение",
         ],
         featured: false,
@@ -133,11 +131,9 @@ const content = {
         price: "8,500 ₽/m²",
         badge: null as string | null,
         description:
-          "Maximum project development with visualization, material selection and implementation support.",
+          "Maximum project development with author's supervision of implementation.",
         items: [
           "Everything from the Basic Project",
-          "Selection of finishing materials",
-          "3D visualization / 3D tour of the object",
           "Author's supervision",
         ],
         featured: false,
