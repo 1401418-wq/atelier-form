@@ -45,13 +45,12 @@ export default function TZPage() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState<{ id: string; viewUrl: string } | null>(null);
   const [hydrated, setHydrated] = useState(false);
-  const [accessKey, setAccessKey] = useState<string | null>(null);
-  const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
-
-  useEffect(() => {
+  const [accessKey, setAccessKey] = useState<string | null>(() => {
+    if (typeof window === "undefined") return null;
     const m = window.location.hash.match(/[#&]k=([^&]+)/);
-    if (m) setAccessKey(decodeURIComponent(m[1]));
-  }, []);
+    return m ? decodeURIComponent(m[1]) : null;
+  });
+  const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
     try {
@@ -171,9 +170,9 @@ export default function TZPage() {
     }
   }
 
-  if (hydrated && !accessKey) {
+  if (!accessKey) {
     return (
-      <main className="min-h-screen bg-[#f6f3ee] text-[#2b2724]">
+      <main className="min-h-screen bg-[#f6f3ee] text-[#2b2724]" suppressHydrationWarning>
         <header className="border-b border-[#e6e0d6] bg-white/60">
           <div className="max-w-[900px] mx-auto px-6 md:px-8 py-5 flex items-center justify-between">
             <Link href="/ru" className="text-[11px] tracking-[0.2em] uppercase text-[#6b635c] hover:text-[#2b2724]">
@@ -257,7 +256,7 @@ export default function TZPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#f6f3ee] text-[#2b2724]">
+    <main className="min-h-screen bg-[#f6f3ee] text-[#2b2724]" suppressHydrationWarning>
       <header className="border-b border-[#e6e0d6] bg-white/60 sticky top-0 z-30 backdrop-blur">
         <div className="max-w-[1180px] mx-auto px-6 md:px-8 py-4 flex items-center justify-between">
           <Link href="/ru" className="text-[11px] tracking-[0.2em] uppercase text-[#6b635c] hover:text-[#2b2724]">
