@@ -53,7 +53,7 @@ export const projects: Project[] = [
     year: "2024",
     location: { ru: "Москва, ЖК ONYX Delux", en: "Moscow, ONYX Delux" },
     heroImage: "/projects/onyx/01.jpg",
-    gallery: Array.from({ length: 7 }, (_, i) => `/projects/onyx/${String(i + 1).padStart(2, "0")}.jpg`),
+    gallery: Array.from({ length: 13 }, (_, i) => `/projects/onyx/${String(i + 1).padStart(2, "0")}.jpg`),
     brief: {
       ru: "Заказчик хотел простор и тишину — без декоративного шума.",
       en: "The client wanted space and silence — without decorative noise.",
