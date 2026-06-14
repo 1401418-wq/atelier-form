@@ -31,7 +31,7 @@ export const projects: Project[] = [
     year: "2026",
     location: { ru: "Москва, ЖК Павелецкая Сити", en: "Moscow, Paveletsky City" },
     heroImage: "/projects/pavelets/01.jpg",
-    gallery: Array.from({ length: 14 }, (_, i) => `/projects/pavelets/${String(i + 1).padStart(2, "0")}.jpg`),
+    gallery: Array.from({ length: 15 }, (_, i) => `/projects/pavelets/${String(i + 1).padStart(2, "0")}.jpg`),
     brief: {
       ru: "Просторная семейная квартира — кухня-остров, гостиная с панорамой, мастер-спальня, детская, кабинет, три санузла. Премиум-материалы, спокойная палитра, чистая архитектура.",
       en: "A spacious family apartment — island kitchen, living room with panoramic view, master bedroom, kids' room, study, three bathrooms. Premium materials, restrained palette, clean architecture.",
