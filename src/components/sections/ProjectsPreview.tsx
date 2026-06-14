@@ -6,18 +6,12 @@ import { projects } from "@/lib/projects";
 import translations, { type Locale } from "@/lib/translations";
 import styles from "./ProjectsPreview.module.css";
 
-const projectImages: Record<string, string> = {
-  "warm-apartment": "/projects/light-apartment.png",
-  "open-plan-house": "/projects/open-plan-house.png",
-  "soft-bedroom": "/projects/soft-bedroom.png",
-};
-
 type Props = {
   locale: Locale;
 };
 
 export function ProjectsPreview({ locale }: Props) {
-  const slugOrder = ["warm-apartment", "open-plan-house", "soft-bedroom"];
+  const slugOrder = ["pavelets-city", "onyx-delux", "dynasty"];
   const featured = slugOrder
     .map((slug) => projects.find((p) => p.slug === slug))
     .filter(Boolean) as typeof projects;
@@ -44,7 +38,7 @@ export function ProjectsPreview({ locale }: Props) {
                 className={styles.card}
               >
                 <Image
-                  src={projectImages[project.slug] || project.heroImage}
+                  src={project.heroImage}
                   alt={project.title[locale]}
                   fill
                   className={styles.cardImage}

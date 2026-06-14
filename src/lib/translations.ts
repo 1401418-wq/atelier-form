@@ -45,6 +45,11 @@ export const translations = {
       year: "Год",
       location: "Локация",
       back: "← Проекты",
+      brief: "Задача",
+      concept: "Концепция",
+      highlight: "Особенность проекта",
+      partner: "Реализация",
+      gallery: "Галерея",
     },
 
     services: {
@@ -183,6 +188,11 @@ export const translations = {
       year: "Year",
       location: "Location",
       back: "← Projects",
+      brief: "Brief",
+      concept: "Concept",
+      highlight: "Project highlight",
+      partner: "Construction by",
+      gallery: "Gallery",
     },
 
     services: {
