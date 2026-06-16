@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import ChatWidget from "@/components/ui/ChatWidget";
+import YandexMetrika from "@/components/YandexMetrika";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin", "cyrillic"],
@@ -52,13 +53,13 @@ export default function RootLayout({
   return (
     <html lang="ru" className={cormorant.variable}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
         {/* Runs synchronously before first paint so animations only hide content when JS is available */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js-anim')" }} />
       </head>
       <body className="bg-background text-foreground antialiased">
         {children}
         <ChatWidget />
+        <YandexMetrika />
       </body>
     </html>
   );
