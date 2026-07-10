@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const BACKEND_URL = "https://web-production-336017.up.railway.app/brief";
-const REGEN_URL = "https://web-production-336017.up.railway.app/regenerate-images";
+const BACKEND_URL = "https://pervyyii.ru/api/alina/brief";
+const REGEN_URL = "https://pervyyii.ru/api/alina/regenerate-images";
 
 type Palette = { hex: string; name: string };
 type Image = {

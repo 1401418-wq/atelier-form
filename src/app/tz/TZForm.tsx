@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { SECTIONS, Field, Section } from "./sections";
 
-const BACKEND_URL = "https://web-production-336017.up.railway.app/tz";
+const BACKEND_URL = "https://pervyyii.ru/api/alina/tz";
 const STORAGE_KEY = "tz-draft-v1";
 
 type AnswerValue = string | string[];
